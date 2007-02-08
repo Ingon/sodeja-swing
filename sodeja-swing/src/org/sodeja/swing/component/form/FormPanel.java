@@ -37,11 +37,11 @@ public abstract class FormPanel<T extends ApplicationContext, R> extends Applica
 		return ButtonBarFactory.okCancelButtons(ctx, this);
 	}
 	
-	protected void showForm() {
+	public void showForm() {
 		showForm(null);
 	}
 	
-	protected void showForm(R object) {
+	public void showForm(R object) {
 		showForm();
 	}
 	
