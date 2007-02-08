@@ -1,15 +1,11 @@
 package org.sodeja.swing.component.tabbed;
 
-import org.sodeja.swing.component.ApplicationPanel;
-import org.sodeja.swing.context.ApplicationContext;
+import javax.swing.JComponent;
 
-public abstract class TabbedPanelElement<T extends ApplicationContext> extends ApplicationPanel<T> {
+public interface TabbedPanelElement {
+	public JComponent getComponent();
+	public String getTabName();
 	
-	public TabbedPanelElement(T ctx) {
-		super(ctx);
-	}
-
-	public abstract String getName();
-	
-	public abstract void tabSelected();
+	public void tabSelected();
+	public void tabDeselected();
 }
