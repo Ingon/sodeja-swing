@@ -8,7 +8,7 @@ import java.util.Map;
 
 import javax.swing.table.AbstractTableModel;
 
-import org.sodeja.model.Code;
+import org.sodeja.model.LocalizableResource;
 
 class CodeTableModel extends AbstractTableModel {
 
@@ -40,7 +40,7 @@ class CodeTableModel extends AbstractTableModel {
 		}
 	}
 	
-	public void copyFrom(Code code) {
+	public void copyFrom(LocalizableResource code) {
 		locales.clear();
 		i18n.clear();
 		
@@ -50,7 +50,7 @@ class CodeTableModel extends AbstractTableModel {
 		}
 	}
 	
-	public void copyTo(Code code) {
+	public void copyTo(LocalizableResource code) {
 		for(Map.Entry<Locale, String> entry : i18n.entrySet()) {
 			code.setLocalizedValue(entry.getKey(), entry.getValue());
 		}

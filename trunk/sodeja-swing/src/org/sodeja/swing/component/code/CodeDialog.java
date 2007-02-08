@@ -7,7 +7,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import org.sodeja.model.Code;
+import org.sodeja.model.LocalizableResource;
 import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.GridBag;
 import org.sodeja.swing.component.ApplicationFrame;
@@ -27,7 +27,7 @@ public class CodeDialog<T extends ApplicationContext> extends FormDialog<T> {
 	private JTable tblLocalization;
 	private CodeTableModel tblLocalizationModel;
 	
-	private Code code;
+	private LocalizableResource code;
 	
 	public CodeDialog(T ctxCons) throws HeadlessException {
 		super(ctxCons);
@@ -70,7 +70,7 @@ public class CodeDialog<T extends ApplicationContext> extends FormDialog<T> {
 		super.postInitComponents();
 	}
 
-	public void showLocalization(Code code) {
+	public void showLocalization(LocalizableResource code) {
 		this.code = code;
 		
 		tfCodeId.setText(code.getId());
