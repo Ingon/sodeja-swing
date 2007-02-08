@@ -16,6 +16,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.GridBag;
+import org.sodeja.swing.component.action.ApplicationAction;
 import org.sodeja.swing.component.action.CallLocalMethodAction;
 import org.sodeja.swing.context.ApplicationContext;
 import org.sodeja.swing.resource.ResourceConstants;
@@ -25,6 +26,9 @@ public class PicturePanel<T extends ApplicationContext> extends JComponent {
 	private static final long serialVersionUID = 8883907109594290021L;
 
 	private T ctx;
+	
+	private ApplicationAction<T> addAction;
+	private ApplicationAction<T> removeAction;
 	
 	private JList contentList;
 	private PictureListModel contentModel;
@@ -47,9 +51,10 @@ public class PicturePanel<T extends ApplicationContext> extends JComponent {
 		contentList.setVisibleRowCount(-1);
 		add(new JScrollPane(contentList), GridBag.bigPanel());
 		
-		add(ButtonBarFactory.constructVerticalButtonsPane(
-				new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_ADD, this, "addCallback"), 
-				new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_REMOVE, this, "removeCallback")),
+		addAction = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_ADD, this, "addCallback");
+		removeAction = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_REMOVE, this, "removeCallback");
+		
+		add(ButtonBarFactory.constructVerticalButtonsPane(addAction, removeAction),
 			GridBag.buttonColumn(1, 1));
 	}
 	
@@ -95,5 +100,12 @@ public class PicturePanel<T extends ApplicationContext> extends JComponent {
 	
 	public void setData(List<ImageIcon> images) {
 		contentModel.setImages(images);
+	}
+	
+	@Override
+	public void setEnabled(boolean state) {
+		addAction.setEnabled(false);
+		removeAction.setEnabled(false);
+		super.setEnabled(state);
 	}
 }
