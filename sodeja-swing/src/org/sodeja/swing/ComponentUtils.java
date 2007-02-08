@@ -12,19 +12,21 @@ public final class ComponentUtils {
 		container.removeAll();
 		container.add(component, layout);
 
-		container.revalidate();
-		container.repaint();
+		repaint(container);
 	}
 	
 	public static void removeFromContainer(JComponent component) {
 		JComponent parent = (JComponent) component.getParent();
 		parent.remove(component);
-		parent.revalidate();
-		parent.repaint();
+		repaint(parent);
 	}
 	
 	public static void clearContainer(JComponent container) {
 		container.removeAll();
+		repaint(container);
+	}
+
+	private static void repaint(JComponent container) {
 		container.revalidate();
 		container.repaint();
 	}

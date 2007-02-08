@@ -1,21 +1,21 @@
 package org.sodeja.swing.event;
 
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import java.util.Locale;
 
 import org.sodeja.lang.reflect.ReflectUtils;
+import org.sodeja.swing.locale.LocaleChangeListener;
 
-public class CallLocalMethodListSelectionListener implements ListSelectionListener {
-	
+public class CallLocalMethodLocaleChangeListener implements LocaleChangeListener {
+
 	private Object targetInstance;
 	private String targetMethodName;
 	
-	public CallLocalMethodListSelectionListener(Object targetInstance, String targetMethodName) {
+	public CallLocalMethodLocaleChangeListener(Object targetInstance, String targetMethodName) {
 		this.targetInstance = targetInstance;
 		this.targetMethodName = targetMethodName;
 	}
-	
-	public void valueChanged(ListSelectionEvent e) {
+
+	public void localeChanged(Locale oldLocale, Locale newLocale) {
 		ReflectUtils.executeMethod(targetInstance, targetMethodName, 
 				ReflectUtils.EMPTY_TYPES, ReflectUtils.EMPTY_PARAMETERS);
 	}
