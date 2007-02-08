@@ -9,6 +9,8 @@ import org.sodeja.dataservice.DataServiceListener;
 
 public class DataServiceListModel<T> extends AbstractListModel implements DataServiceListener<T> {
 
+	private static final long serialVersionUID = -3832285095148408422L;
+	
 	private List<T> internalData;
 	private DataService<T> dataService;
 	

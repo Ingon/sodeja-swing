@@ -2,14 +2,12 @@ package org.sodeja.swing.component;
 
 import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
 
-import org.sodeja.swing.component.action.ApplicationAction;
 import org.sodeja.swing.component.action.CallLocalMethodAction;
 import org.sodeja.swing.context.ApplicationContext;
 import org.sodeja.swing.context.ApplicationContextProvider;

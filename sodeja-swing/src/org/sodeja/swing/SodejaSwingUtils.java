@@ -18,9 +18,6 @@ import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import org.sodeja.swing.context.ApplicationContext;
-import org.sodeja.swing.context.ApplicationContextProvider;
-
 public final class SodejaSwingUtils {
 	public static void scrollTabsToLatest(JTabbedPane tabPane) {
 		// WORKAROUND http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=5037709
