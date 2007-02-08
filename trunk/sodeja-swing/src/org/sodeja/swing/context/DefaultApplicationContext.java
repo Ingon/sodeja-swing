@@ -5,17 +5,20 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
+import org.sodeja.context.ContextImpl;
 import org.sodeja.swing.component.ApplicationFrame;
 import org.sodeja.swing.locale.LocaleProvider;
+import org.sodeja.swing.resource.LocalizationFactory;
 import org.sodeja.swing.resource.ResourceProvider;
 import org.sodeja.swing.validation.ValidationController;
 
-public class DefaultApplicationContext implements ApplicationContext {
+public class DefaultApplicationContext extends ContextImpl implements ApplicationContext {
 
 	private List<ApplicationContextListener> listeners;
 	
 	private LocaleProvider localeProvider;
 	private ResourceProvider resourceProvider;
+	private LocalizationFactory localizationFactory;
 	private ApplicationFrame rootFrame;
 	private ValidationController validationController;
 	
@@ -80,6 +83,14 @@ public class DefaultApplicationContext implements ApplicationContext {
 		this.resourceProvider = resourceProvider;
 	}
 
+	public LocalizationFactory getLocalizationFactory() {
+		return localizationFactory;
+	}
+
+	public void setLocalizationFactory(LocalizationFactory localizationFactory) {
+		this.localizationFactory = localizationFactory;
+	}
+
 	public ValidationController getValidationController() {
 		return validationController;
 	}
@@ -87,5 +98,4 @@ public class DefaultApplicationContext implements ApplicationContext {
 	public void setValidationController(ValidationController validationController) {
 		this.validationController = validationController;
 	}
-
 }

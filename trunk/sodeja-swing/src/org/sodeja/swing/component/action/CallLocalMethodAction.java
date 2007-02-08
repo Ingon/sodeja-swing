@@ -1,7 +1,6 @@
 package org.sodeja.swing.component.action;
 
 import java.awt.event.ActionEvent;
-import java.lang.reflect.Method;
 
 import org.sodeja.lang.reflect.ReflectUtils;
 import org.sodeja.swing.context.ApplicationContext;
@@ -20,7 +19,7 @@ public class CallLocalMethodAction<T extends ApplicationContext> extends Localiz
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		Method method = ReflectUtils.findMethodInHierarchy(targetInstance, targetMethodName, new Class[0]);
-		ReflectUtils.executeMethod(targetInstance, method, new Object[] {});
+		ReflectUtils.executeMethod(targetInstance, targetMethodName, 
+				ReflectUtils.EMPTY_TYPES, ReflectUtils.EMPTY_PARAMETERS);
 	}
 }
