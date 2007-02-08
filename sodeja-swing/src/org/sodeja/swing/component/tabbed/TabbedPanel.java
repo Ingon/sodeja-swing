@@ -37,16 +37,11 @@ public class TabbedPanel<T extends ApplicationContext> extends ApplicationPanel<
 			}
 		});
 		this.add(tabs, GridBag.bigPanel());
-//
-//		for(int i = 0;i < elements.size();i++) {
-//			tabs.addTab("Unknown", elements.get(i));
-//			tabs.setTitleAt(i, elements.get(i).getName());
-//		}
 	}
 
 	public void addTab(TabbedPanelElement element) {
 		elements.add(element);
-		tabs.addTab(element.getName(), element);
+		tabs.addTab(element.getTabName(), element.getComponent());
 	}
 
 	private void tabSelected(int selectedIndex) {
@@ -55,7 +50,7 @@ public class TabbedPanel<T extends ApplicationContext> extends ApplicationPanel<
 
 	public void localeChanged(Locale oldLocale, Locale newLocale) {
 		for(int i = 0;i < elements.size();i++) {
-			tabs.setTitleAt(i, elements.get(i).getName());
+			tabs.setTitleAt(i, elements.get(i).getTabName());
 		}
 	}
 }
