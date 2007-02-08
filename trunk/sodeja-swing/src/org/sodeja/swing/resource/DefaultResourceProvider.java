@@ -30,7 +30,11 @@ public class DefaultResourceProvider implements ResourceProvider, ApplicationCon
         return bundle.getString(key);
     }
 
-    public Image getImageValue(String key) {
+    public String getEnumValue(Enum key) {
+		return getStringValue(key.getDeclaringClass().getName() + "." + key);
+	}
+
+	public Image getImageValue(String key) {
     	return getImageIcon(key).getImage();
 	}
 
