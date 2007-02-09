@@ -25,5 +25,12 @@ public abstract class NamedFormDialog<T extends ApplicationContext> extends Form
 		FormUtils.standartNamedPreInit(this, ctx, gridData, getResourceName());
 	}
 
+	@Override
+	protected void postInitComponents() {
+		super.postInitComponents();
+		
+		setTitle(ctx.getResourceProvider().getStringValue(getResourceName()));
+	}
+
 	protected abstract String getResourceName();
 }

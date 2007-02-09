@@ -40,6 +40,36 @@ class LocalizableResourceTableModel extends AbstractTableModel {
 		}
 	}
 	
+	@Override
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+		return columnIndex == 1;
+	}
+	
+	@Override
+	public void setValueAt(Object value, int rowIndex, int columnIndex) {
+		Locale locale = getLocale(rowIndex);
+		i18n.put(locale	, (String) value);
+	}
+
+	private Locale getLocale(int index) {
+		return locales.get(index);
+	}
+	
+	public void removeLocaleAt(int index) {
+		Locale locale = getLocale(index);
+		locales.remove(locale);
+		i18n.remove(locale);
+		
+		fireTableDataChanged();
+	}
+	
+	public void addLocale(Locale locale, String value) {
+		locales.add(locale);
+		i18n.put(locale, value);
+		
+		fireTableDataChanged();
+	}
+	
 	public void copyFrom(LocalizableResource code) {
 		locales.clear();
 		i18n.clear();
