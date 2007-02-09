@@ -38,4 +38,14 @@ public final class FormUtils {
 		parent.add(ButtonBarFactory.constructHorizontalButtonsPane(actions),
 			GridBag.buttonLine(gridData.getRow(), gridData.getColumnsCount()));
 	}
+	
+	protected static void standartNamedPreInit(Container cont, ApplicationContext ctx, FormPanelGridData gridData, String resourceName) {
+		JLabel lblName = new JLabel(ctx.getResourceProvider().getStringValue(resourceName));
+		lblName.setFont(lblName.getFont().deriveFont(18f));
+		lblName.setHorizontalAlignment(JLabel.CENTER);
+		
+		cont.add(lblName, GridBag.create(gridData.getRow(), 0, gridData.getColumnsCount(), 1, 1.0, 0.0));
+		
+		gridData.nextRow();
+	}
 }

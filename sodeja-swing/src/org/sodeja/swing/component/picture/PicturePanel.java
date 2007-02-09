@@ -76,7 +76,8 @@ public class PicturePanel<T extends ApplicationContext> extends JComponent {
 		
 		for(File file : chooser.getSelectedFiles()) {
 			ImageIcon icon = new ImageIcon(file.getAbsolutePath());
-			Image scaled = icon.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+			int scale = getHeight();
+			Image scaled = icon.getImage().getScaledInstance(scale, scale, Image.SCALE_DEFAULT);
 			icon.setImage(scaled);
 			contentModel.addImage(icon);
 		}
