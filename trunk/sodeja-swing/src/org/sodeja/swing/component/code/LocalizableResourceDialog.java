@@ -1,28 +1,29 @@
 package org.sodeja.swing.component.code;
 
 import java.awt.HeadlessException;
+import java.util.Locale;
 
-import javax.swing.JLabel;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import org.sodeja.functional.Pair;
 import org.sodeja.model.LocalizableResource;
 import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.GridBag;
 import org.sodeja.swing.component.ApplicationDialog;
 import org.sodeja.swing.component.ApplicationFrame;
 import org.sodeja.swing.component.action.CallLocalMethodAction;
-import org.sodeja.swing.component.form.FormDialog;
 import org.sodeja.swing.component.form.FormPanelGridData;
+import org.sodeja.swing.component.form.NamedFormDialog;
 import org.sodeja.swing.context.ApplicationContext;
 import org.sodeja.swing.resource.ResourceConstants;
 
-public class LocalizableResourceDialog<T extends ApplicationContext> extends FormDialog<T> {
+public class LocalizableResourceDialog<T extends ApplicationContext> extends NamedFormDialog<T> {
 
 	private static final long serialVersionUID = -2318681092752453854L;
 
-	private JLabel lblCodeId;
 	private JTextField tfCodeId;
 	
 	private JTable tblLocalization;
@@ -44,25 +45,30 @@ public class LocalizableResourceDialog<T extends ApplicationContext> extends For
 
 	@Override
 	protected void initComponentsDelegate(FormPanelGridData gridData) {
-		lblCodeId = new JLabel("Code: ");
-		add(lblCodeId, GridBag.lineLabel(0));
+		add(ctx.getLocalizationFactory().createLabel(ResourceConstants.LBL_ID), 
+				GridBag.lineLabel(gridData.getRow()));
 		
 		tfCodeId = new JTextField();
-		add(tfCodeId, GridBag.lineField(0, 1));
+		tfCodeId.setEditable(false);
+		add(tfCodeId, GridBag.lineField(gridData.getRow(), 1));
 		
 		gridData.nextRow();
 		
 		tblLocalizationModel = new LocalizableResourceTableModel();
 		tblLocalization = new JTable(tblLocalizationModel);
-		tblLocalization.getColumnModel().getColumn(0).setHeaderValue("Locale");
-		tblLocalization.getColumnModel().getColumn(1).setHeaderValue("Value");
+		tblLocalization.getColumnModel().getColumn(0).setHeaderValue(
+				ctx.getResourceProvider().getStringValue(ResourceConstants.TH_LOCALE));
+		tblLocalization.getColumnModel().getColumn(1).setHeaderValue(
+				ctx.getResourceProvider().getStringValue(ResourceConstants.TH_VALUE));
 		
-		add(new JScrollPane(tblLocalization), GridBag.bigPanel(1, 2));
+		tblLocalization.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(new JTextField()));
+		
+		add(new JScrollPane(tblLocalization), GridBag.bigPanel(gridData.getRow(), 2));
 		
 		add(ButtonBarFactory.constructVerticalButtonsPane(
 				new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_ADD, this, "addCallback"),
 				new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_REMOVE, this, "removeCallback")),
-			GridBag.buttonColumn(2, 1, 1));
+			GridBag.buttonColumn(2, gridData.getRow(), 1));
 		
 		gridData.setColumnsCount(3);
 	}
@@ -87,14 +93,27 @@ public class LocalizableResourceDialog<T extends ApplicationContext> extends For
 	@Override
 	protected void okCallback() {
 		tblLocalizationModel.copyTo(code);
-		code.setId(tfCodeId.getText());
 		
 		super.okCallback();
 	}
 	
 	protected void addCallback() {
+		AddLocalizationDialog<T> dialog = new AddLocalizationDialog<T>(ctx, this);
+		Pair<Locale, String> result = dialog.showAddLocalization();
+		tblLocalizationModel.addLocale(result.p1, result.p2);
 	}
 	
 	protected void removeCallback() {
+		int row = tblLocalization.getSelectedRow();
+		if(row < 0) {
+			return;
+		}
+		
+		tblLocalizationModel.removeLocaleAt(row);
+	}
+
+	@Override
+	protected String getResourceName() {
+		return ResourceConstants.DLG_LOCALIZATION;
 	}
 }

@@ -2,6 +2,7 @@ package org.sodeja.swing.component.form;
 
 import java.awt.Container;
 
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -9,19 +10,32 @@ import javax.swing.JTextField;
 
 import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.GridBag;
-import org.sodeja.swing.component.ApplicationPanel;
 import org.sodeja.swing.component.action.ApplicationAction;
 import org.sodeja.swing.context.ApplicationContext;
 
 public final class FormUtils {
-	public static JTextField addLabeledField(ApplicationContext ctx, ApplicationPanel parent, String lblKey, int index) {
-		JLabel lbl = new JLabel(ctx.getResourceProvider().getStringValue(lblKey));
-		parent.add(lbl, GridBag.lineLabel(index));
+	public static JTextField addLabeledField(ApplicationContext ctx, Container parent, 
+			String lblKey, FormPanelGridData gridData) {
+		parent.add(ctx.getLocalizationFactory().createLabel(lblKey), GridBag.lineLabel(gridData.getRow()));
 		
 		JTextField tf = new JTextField();
-		parent.add(tf, GridBag.lineField(index));
+		parent.add(tf, GridBag.lineField(gridData.getRow()));
+		
+		gridData.nextRow();
 		
 		return tf;
+	}
+
+	public static JComboBox addLabeledCombo(ApplicationContext ctx, Container parent, 
+			String lblKey, FormPanelGridData gridData) {
+		parent.add(ctx.getLocalizationFactory().createLabel(lblKey), GridBag.lineLabel(gridData.getRow()));
+		
+		JComboBox cmb = new JComboBox();
+		parent.add(cmb, GridBag.lineField(gridData.getRow()));
+		
+		gridData.nextRow();
+		
+		return cmb;
 	}
 	
 	protected static void standartPostInit(Container parent, FormPanelGridData gridData, ApplicationAction[] actions) {
