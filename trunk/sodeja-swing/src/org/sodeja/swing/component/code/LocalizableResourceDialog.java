@@ -18,7 +18,7 @@ import org.sodeja.swing.component.form.FormPanelGridData;
 import org.sodeja.swing.context.ApplicationContext;
 import org.sodeja.swing.resource.ResourceConstants;
 
-public class CodeDialog<T extends ApplicationContext> extends FormDialog<T> {
+public class LocalizableResourceDialog<T extends ApplicationContext> extends FormDialog<T> {
 
 	private static final long serialVersionUID = -2318681092752453854L;
 
@@ -26,19 +26,19 @@ public class CodeDialog<T extends ApplicationContext> extends FormDialog<T> {
 	private JTextField tfCodeId;
 	
 	private JTable tblLocalization;
-	private CodeTableModel tblLocalizationModel;
+	private LocalizableResourceTableModel tblLocalizationModel;
 	
 	private LocalizableResource code;
 	
-	public CodeDialog(T ctxCons) throws HeadlessException {
+	public LocalizableResourceDialog(T ctxCons) throws HeadlessException {
 		super(ctxCons);
 	}
 
-	public CodeDialog(T ctxCons, ApplicationFrame parent) throws HeadlessException {
+	public LocalizableResourceDialog(T ctxCons, ApplicationFrame parent) throws HeadlessException {
 		super(ctxCons, parent);
 	}
 
-	public CodeDialog(T ctxCons, ApplicationDialog parent) throws HeadlessException {
+	public LocalizableResourceDialog(T ctxCons, ApplicationDialog parent) throws HeadlessException {
 		super(ctxCons, parent);
 	}
 
@@ -52,7 +52,7 @@ public class CodeDialog<T extends ApplicationContext> extends FormDialog<T> {
 		
 		gridData.nextRow();
 		
-		tblLocalizationModel = new CodeTableModel();
+		tblLocalizationModel = new LocalizableResourceTableModel();
 		tblLocalization = new JTable(tblLocalizationModel);
 		tblLocalization.getColumnModel().getColumn(0).setHeaderValue("Locale");
 		tblLocalization.getColumnModel().getColumn(1).setHeaderValue("Value");
