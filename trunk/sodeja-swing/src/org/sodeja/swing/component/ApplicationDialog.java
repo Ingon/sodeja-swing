@@ -4,6 +4,7 @@ import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
@@ -48,6 +49,7 @@ public abstract class ApplicationDialog<T extends ApplicationContext> extends JD
 
 	protected void preInitComponents() {
         setLayout(new GridBagLayout());
+        ((JComponent) getContentPane()).setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
         
 		KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
 		this.getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(stroke, ACTION_KEY);

@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import org.sodeja.model.LocalizableResource;
 import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.GridBag;
+import org.sodeja.swing.component.ApplicationDialog;
 import org.sodeja.swing.component.ApplicationFrame;
 import org.sodeja.swing.component.action.CallLocalMethodAction;
 import org.sodeja.swing.component.form.FormDialog;
@@ -34,6 +35,10 @@ public class CodeDialog<T extends ApplicationContext> extends FormDialog<T> {
 	}
 
 	public CodeDialog(T ctxCons, ApplicationFrame parent) throws HeadlessException {
+		super(ctxCons, parent);
+	}
+
+	public CodeDialog(T ctxCons, ApplicationDialog parent) throws HeadlessException {
 		super(ctxCons, parent);
 	}
 

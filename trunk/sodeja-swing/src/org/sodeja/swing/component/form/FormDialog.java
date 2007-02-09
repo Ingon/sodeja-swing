@@ -18,6 +18,10 @@ public abstract class FormDialog<T extends ApplicationContext> extends Applicati
 		super(ctxCons, parent);
 	}
 
+	public FormDialog(T ctxCons, ApplicationDialog parent) throws HeadlessException {
+		super(ctxCons, parent);
+	}
+
 	@Override
 	protected final void initComponents() {
 		FormPanelGridData gridData = new FormPanelGridData();
@@ -26,12 +30,12 @@ public abstract class FormDialog<T extends ApplicationContext> extends Applicati
 		postInitComponents(gridData);
 	}
 
-	private void preInitComponents(FormPanelGridData gridData) {
+	protected void preInitComponents(FormPanelGridData gridData) {
 	}
 
 	protected abstract void initComponentsDelegate(FormPanelGridData gridData);
 
-	private void postInitComponents(FormPanelGridData gridData) {
+	protected void postInitComponents(FormPanelGridData gridData) {
 		FormUtils.standartPostInit(this, gridData, getActions());
 	}
 
