@@ -10,14 +10,14 @@ import javax.swing.table.AbstractTableModel;
 
 import org.sodeja.model.LocalizableResource;
 
-class CodeTableModel extends AbstractTableModel {
+class LocalizableResourceTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 4658917363517240515L;
 
 	private List<Locale> locales;
 	private Map<Locale, String> i18n;
 	
-	public CodeTableModel() {
+	public LocalizableResourceTableModel() {
 		locales = new ArrayList<Locale>();
 		i18n = new HashMap<Locale, String>();
 	}
