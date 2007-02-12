@@ -52,7 +52,7 @@ class AddLocalizationDialog<T extends ApplicationContext> extends NamedFormDialo
 	public Pair<Locale, String> showAddLocalization() {
 		result = null;
 		cmbLocales.setSelectedIndex(0);
-		tfValue.setText("");
+		tfValue.setText(""); //$NON-NLS-1$
 		
 		setVisible(true);
 		

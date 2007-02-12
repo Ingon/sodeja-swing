@@ -21,7 +21,7 @@ public class MenuBuilder<T extends ApplicationContext> {
 	
 	public void startMenu(String name) {
 		if(menu != null) {
-			throw new IllegalStateException("Already finished menu constrcution");
+			throw new IllegalStateException("Already finished menu constrcution"); //$NON-NLS-1$
 		}
 		JMenu resultingMenu = new JMenu(new MenuBuilderAction<T>(ctx, name));
 		if(! menuStack.isEmpty()) {
@@ -32,7 +32,7 @@ public class MenuBuilder<T extends ApplicationContext> {
 	
 	public void addMenuItem(ApplicationAction action) {
 		if(menuStack.isEmpty()) {
-			throw new IllegalStateException("Should start with a menu");
+			throw new IllegalStateException("Should start with a menu"); //$NON-NLS-1$
 		}
 		menuStack.peek().add(new JMenuItem(action));
 	}
@@ -57,7 +57,7 @@ public class MenuBuilder<T extends ApplicationContext> {
 	
 	public JMenu getMenu() {
 		if(menu == null) {
-			throw new IllegalStateException("Menu is still not finished");
+			throw new IllegalStateException("Menu is still not finished"); //$NON-NLS-1$
 		}
 		return menu;
 	}

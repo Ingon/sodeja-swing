@@ -17,9 +17,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.GridBag;
 import org.sodeja.swing.component.action.ApplicationAction;
-import org.sodeja.swing.component.action.CallLocalMethodAction;
 import org.sodeja.swing.context.ApplicationContext;
-import org.sodeja.swing.resource.ResourceConstants;
 
 public class PicturePanel<T extends ApplicationContext> extends JComponent {
 
@@ -51,8 +49,8 @@ public class PicturePanel<T extends ApplicationContext> extends JComponent {
 		contentList.setVisibleRowCount(-1);
 		add(new JScrollPane(contentList), GridBag.bigPanel());
 		
-		addAction = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_ADD, this, "addCallback");
-		removeAction = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_REMOVE, this, "removeCallback");
+		addAction = ButtonBarFactory.addButton(ctx, this);
+		removeAction = ButtonBarFactory.removeButton(ctx, this);
 		
 		add(ButtonBarFactory.constructVerticalButtonsPane(addAction, removeAction),
 			GridBag.buttonColumn(1, 1));
