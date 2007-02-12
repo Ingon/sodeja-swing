@@ -1,11 +1,8 @@
 package org.sodeja.swing.component.picture;
 
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.io.File;
-import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
@@ -13,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.sodeja.model.FileResource;
 import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.GridBag;
 import org.sodeja.swing.component.action.ApplicationAction;
@@ -47,6 +45,7 @@ public class PicturePanel<T extends ApplicationContext> extends JComponent {
 		contentList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		contentList.setLayoutOrientation(JList.VERTICAL_WRAP);
 		contentList.setVisibleRowCount(-1);
+		contentList.setCellRenderer(new PictureResourceListCellRenderer());
 		add(new JScrollPane(contentList), GridBag.bigPanel());
 		
 		addAction = ButtonBarFactory.addButton(ctx, this);
@@ -73,17 +72,16 @@ public class PicturePanel<T extends ApplicationContext> extends JComponent {
 		}
 		
 		for(File file : chooser.getSelectedFiles()) {
-			ImageIcon icon = new ImageIcon(file.getAbsolutePath());
+			PictureResource resource = new PictureResource(new FileResource(file));
 			int scale = getHeight();
-			Image scaled = icon.getImage().getScaledInstance(scale, scale, Image.SCALE_DEFAULT);
-			icon.setImage(scaled);
-			contentModel.addImage(icon);
+			resource.scaleImage(scale, scale);
+			contentModel.addPicure(resource);
 		}
 	}
 
 	protected void removeCallback() {
 		for(Object value : contentList.getSelectedValues()) {
-			contentModel.removeImage((ImageIcon) value);
+			contentModel.removePicture((PictureResource) value);
 		}
 	}
 	
@@ -91,13 +89,13 @@ public class PicturePanel<T extends ApplicationContext> extends JComponent {
 		contentModel.clear();
 	}
 	
-	public List<ImageIcon> getData() {
-		return contentModel.getImages();
-	}
-	
-	public void setData(List<ImageIcon> images) {
-		contentModel.setImages(images);
-	}
+//	public List<ImageIcon> getData() {
+//		return contentModel.getImages();
+//	}
+//	
+//	public void setData(List<ImageIcon> images) {
+//		contentModel.setImages(images);
+//	}
 	
 	@Override
 	public void setEnabled(boolean state) {

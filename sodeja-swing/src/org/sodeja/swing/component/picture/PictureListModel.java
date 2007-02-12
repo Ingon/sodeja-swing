@@ -5,15 +5,14 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.swing.AbstractListModel;
-import javax.swing.ImageIcon;
 
 class PictureListModel extends AbstractListModel {
 	private static final long serialVersionUID = 4221309134308387966L;
 	
-	private List<ImageIcon> images;
+	private List<PictureResource> images;
 	
 	public PictureListModel() {
-		images = new ArrayList<ImageIcon>();
+		images = new ArrayList<PictureResource>();
 	}
 	
 	public Object getElementAt(int index) {
@@ -24,13 +23,13 @@ class PictureListModel extends AbstractListModel {
 		return images.size();
 	}
 
-	public void addImage(ImageIcon image) {
+	public void addPicure(PictureResource image) {
 		int initialSize = images.size();
 		images.add(image);
 		fireIntervalAdded(this, initialSize, images.size());
 	}
 	
-	public void removeImage(ImageIcon image) {
+	public void removePicture(PictureResource image) {
 		int index = images.indexOf(image);
 		images.remove(index);
 		fireIntervalRemoved(this, index, index);
@@ -44,11 +43,11 @@ class PictureListModel extends AbstractListModel {
 		}
 	}
 	
-	public List<ImageIcon> getImages() {
+	public List<PictureResource> getImages() {
 		return Collections.unmodifiableList(images);
 	}
 
-	public void setImages(List<ImageIcon> newImages) {
+	public void setImages(List<PictureResource> newImages) {
 		images.clear();
 		images.addAll(newImages);
 	}
