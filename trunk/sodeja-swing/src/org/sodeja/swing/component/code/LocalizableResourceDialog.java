@@ -100,7 +100,9 @@ public class LocalizableResourceDialog<T extends ApplicationContext> extends Nam
 	protected void addCallback() {
 		AddLocalizationDialog<T> dialog = new AddLocalizationDialog<T>(ctx, this);
 		Pair<Locale, String> result = dialog.showAddLocalization();
-		tblLocalizationModel.addLocale(result.p1, result.p2);
+		if(result != null) {
+			tblLocalizationModel.addLocale(result.p1, result.p2);
+		}
 	}
 	
 	protected void removeCallback() {
