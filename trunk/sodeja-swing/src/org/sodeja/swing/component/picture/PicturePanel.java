@@ -2,22 +2,25 @@ package org.sodeja.swing.component.picture;
 
 import java.awt.GridBagLayout;
 import java.io.File;
+import java.util.List;
 
-import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.sodeja.model.FileResource;
+import org.sodeja.model.Resource;
 import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.GridBag;
 import org.sodeja.swing.component.action.ApplicationAction;
 import org.sodeja.swing.context.ApplicationContext;
 import org.sodeja.swing.resource.ResourceConstants;
 
-public class PicturePanel<T extends ApplicationContext> extends JComponent {
+public class PicturePanel<T extends ApplicationContext> extends JPanel {
 
 	private static final long serialVersionUID = 8883907109594290021L;
 
@@ -34,7 +37,7 @@ public class PicturePanel<T extends ApplicationContext> extends JComponent {
 		
 		initComponents();
 	}
-	
+
 	private void initComponents() {
 		setBorder(ctx.getLocalizationFactory().createBorder(ResourceConstants.TLT_PICTURES));
 		
@@ -89,13 +92,17 @@ public class PicturePanel<T extends ApplicationContext> extends JComponent {
 		contentModel.clear();
 	}
 	
-//	public List<ImageIcon> getData() {
-//		return contentModel.getImages();
-//	}
-//	
-//	public void setData(List<ImageIcon> images) {
-//		contentModel.setImages(images);
-//	}
+	public List<Resource> getData() {
+		return contentModel.getResources();
+	}
+	
+	public void setData(List<Resource> images) {
+		contentModel.setResources(images);
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				contentModel.scaleAll(getHeight());				
+			}});
+	}
 	
 	@Override
 	public void setEnabled(boolean state) {

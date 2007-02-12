@@ -1,10 +1,14 @@
 package org.sodeja.swing.component.picture;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.AbstractListModel;
+
+import org.sodeja.collections.CollectionUtils;
+import org.sodeja.collections.ListUtils;
+import org.sodeja.functional.Function1;
+import org.sodeja.model.Resource;
 
 class PictureListModel extends AbstractListModel {
 	private static final long serialVersionUID = 4221309134308387966L;
@@ -43,12 +47,27 @@ class PictureListModel extends AbstractListModel {
 		}
 	}
 	
-	public List<PictureResource> getImages() {
-		return Collections.unmodifiableList(images);
+	public List<Resource> getResources() {
+		return ListUtils.map(images, new Function1<Resource, PictureResource>() {
+			public Resource execute(PictureResource p) {
+				return p.getResource();
+			}});
 	}
 
-	public void setImages(List<PictureResource> newImages) {
-		images.clear();
-		images.addAll(newImages);
+	public void setResources(List<Resource> newImages) {
+		clear();
+		
+		CollectionUtils.map(newImages, images, new Function1<PictureResource, Resource>() {
+			public PictureResource execute(Resource p) {
+				return new PictureResource(p);
+			}});
+		
+		fireContentsChanged(this, 0, 0);
+	}
+	
+	public void scaleAll(int scale) {
+		for(PictureResource res : images) {
+			res.scaleImage(scale, scale);
+		}
 	}
 }
