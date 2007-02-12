@@ -1,8 +1,10 @@
 package org.sodeja.swing.dataservice;
 
 import java.awt.GridBagLayout;
+import java.util.List;
 
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -18,6 +20,7 @@ import org.sodeja.swing.component.ApplicationPanel;
 import org.sodeja.swing.component.form.FormPanel;
 import org.sodeja.swing.context.ApplicationContext;
 import org.sodeja.swing.event.CallLocalMethodListSelectionListener;
+import org.sodeja.swing.resource.ResourceConstants;
 
 public abstract class DataServiceListPanel<T extends ApplicationContext, R> extends ApplicationPanel<T> {
 
@@ -88,7 +91,18 @@ public abstract class DataServiceListPanel<T extends ApplicationContext, R> exte
 	}
 
 	protected void searchCallback() {
+		String term = JOptionPane.showInputDialog(ctx.getRootFrame(), 
+				ctx.getResourceProvider().getStringValue(ResourceConstants.DLG_SEARCH_TERM));
+		if(term == null) {
+			return;
+		}
 		
+		List<R> result = dataService.find(createPredicate(term));
+		if(result.isEmpty()) {
+			return;
+		}
+		
+		dataList.setSelectedValue(result.get(0), true);
 	}
 	
 	protected void addCallback() {
