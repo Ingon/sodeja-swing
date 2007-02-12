@@ -31,7 +31,7 @@ public class DefaultResourceProvider implements ResourceProvider, ApplicationCon
     }
 
     public String getEnumValue(Enum key) {
-		return getStringValue(key.getDeclaringClass().getName() + "." + key);
+		return getStringValue(key.getDeclaringClass().getName() + "." + key); //$NON-NLS-1$
 	}
 
 	public Image getImageValue(String key) {
@@ -43,7 +43,7 @@ public class DefaultResourceProvider implements ResourceProvider, ApplicationCon
     }
 
 	private ImageIcon getImageIcon(String key) {
-		return new ImageIcon(this.getClass().getResource(imagesBase + getStringValue(key)));//$NON-NLS-1$
+		return new ImageIcon(this.getClass().getResource(imagesBase + getStringValue(key)));
 	}
 
 	public void applicationStartup(ApplicationContext context) {

@@ -33,9 +33,41 @@ public final class ButtonBarFactory {
     }
     
     public static <T extends ApplicationContext> ApplicationAction[] okCancelButtons(T ctx, Object instance) {
+    	return new ApplicationAction[] {okButton(ctx, instance), cancelButton(ctx, instance)};
+    }
+    
+    public static <T extends ApplicationContext> ApplicationAction[] closeButtons(T ctx, Object instance) {
+    	return new ApplicationAction[] {closeButton(ctx, instance)};
+    }
+
+    public static <T extends ApplicationContext> ApplicationAction<T> closeButton(T ctx, Object instance) {
+    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_CLOSE, instance, "closeCallback"); //$NON-NLS-1$
+    }
+    
+    public static <T extends ApplicationContext> ApplicationAction[] closeToCancelButtons(T ctx, Object instance) {
     	return new ApplicationAction[] {
-				new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_OK, instance, "okCallback"),
-				new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_CANCEL, instance, "cancelCallback")};
+				new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_CLOSE, instance, "cancelCallback"), //$NON-NLS-1$
+    	};
+    }
+    
+    public static <T extends ApplicationContext> ApplicationAction<T> okButton(T ctx, Object instance) {
+    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_OK, instance, "okCallback"); //$NON-NLS-1$
+    }
+
+    public static <T extends ApplicationContext> ApplicationAction<T> cancelButton(T ctx, Object instance) {
+    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_CANCEL, instance, "cancelCallback"); //$NON-NLS-1$
+    }
+    
+    public static <T extends ApplicationContext> ApplicationAction<T> addButton(T ctx, Object instance) {
+    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_ADD, instance, "addCallback"); //$NON-NLS-1$
+    }
+    
+    public static <T extends ApplicationContext> ApplicationAction<T> editButton(T ctx, Object instance) {
+    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_EDIT, instance, "editCallback"); //$NON-NLS-1$
+    }
+
+    public static <T extends ApplicationContext> ApplicationAction<T> removeButton(T ctx, Object instance) {
+    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_REMOVE, instance, "removeCallback"); //$NON-NLS-1$
     }
     
     private static JPanel constructButtonsPane(int rows, int cols, ApplicationAction... actions) {

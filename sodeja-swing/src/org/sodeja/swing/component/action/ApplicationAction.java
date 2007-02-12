@@ -13,7 +13,7 @@ import org.sodeja.swing.context.ApplicationContextProvider;
 public abstract class ApplicationAction<T extends ApplicationContext> extends
 		AbstractAction implements ApplicationContextProvider<T> {
 
-	public static final String TYPE = "TYPE";
+	public static final String TYPE = "TYPE"; //$NON-NLS-1$
 
 	private T ctx;
 	

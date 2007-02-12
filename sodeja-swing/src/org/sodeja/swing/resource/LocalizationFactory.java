@@ -11,7 +11,7 @@ import org.sodeja.swing.event.CallLocalMethodLocaleChangeListener;
 
 public class LocalizationFactory {
 
-	private static final String I18NKey = "i18n";
+	private static final String I18NKey = "i18n"; //$NON-NLS-1$
 	
 	private ApplicationContext ctx;
 	private List<WeakReference<JLabel>> labels;
@@ -19,7 +19,7 @@ public class LocalizationFactory {
 	public LocalizationFactory(ApplicationContext ctx) {
 		this.ctx = ctx;
 		ctx.getLocaleProvider().addLocaleChangeListener(
-				new CallLocalMethodLocaleChangeListener(this, "localeChangedCallback"));
+				new CallLocalMethodLocaleChangeListener(this, "localeChangedCallback")); //$NON-NLS-1$
 		labels = new ArrayList<WeakReference<JLabel>>();
 	}
 	
@@ -31,8 +31,7 @@ public class LocalizationFactory {
 		return lbl;
 	}
 	
-	@SuppressWarnings("unused")
-	private void localeChangedCallback() {
+	protected void localeChangedCallback() {
 		for(WeakReference<JLabel> ref : labels) {
 			JLabel lbl = ref.get();
 			if(lbl != null) {

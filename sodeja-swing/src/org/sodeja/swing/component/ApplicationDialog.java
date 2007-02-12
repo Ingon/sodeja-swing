@@ -9,10 +9,9 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
 
-import org.sodeja.swing.component.action.CallLocalMethodAction;
+import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.context.ApplicationContext;
 import org.sodeja.swing.context.ApplicationContextProvider;
-import org.sodeja.swing.resource.ResourceConstants;
 
 public abstract class ApplicationDialog<T extends ApplicationContext> extends JDialog implements ApplicationContextProvider<T> {
 
@@ -53,8 +52,7 @@ public abstract class ApplicationDialog<T extends ApplicationContext> extends JD
         
 		KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
 		this.getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(stroke, ACTION_KEY);
-		this.getRootPane().getActionMap().put(ACTION_KEY, 
-				new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_CLOSE, this, "closeCallback"));
+		this.getRootPane().getActionMap().put(ACTION_KEY, ButtonBarFactory.closeButton(ctx, this));
 	}
 	
     protected abstract void initComponents();

@@ -26,7 +26,7 @@ public class MenuBarBuilder<T extends ApplicationContext> {
 
 	public JMenuBar finishMenu() {
 		if(menuBuilder == null) {
-			throw new IllegalStateException("Did not start menu to finish it");
+			throw new IllegalStateException("Did not start menu to finish it"); //$NON-NLS-1$
 		}
 		menuBar.add(menuBuilder.finishAll());
 		menuBuilder = null;

@@ -14,7 +14,6 @@ import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.GridBag;
 import org.sodeja.swing.component.ApplicationDialog;
 import org.sodeja.swing.component.ApplicationFrame;
-import org.sodeja.swing.component.action.CallLocalMethodAction;
 import org.sodeja.swing.component.form.FormPanelGridData;
 import org.sodeja.swing.component.form.NamedFormDialog;
 import org.sodeja.swing.context.ApplicationContext;
@@ -66,8 +65,8 @@ public class LocalizableResourceDialog<T extends ApplicationContext> extends Nam
 		add(new JScrollPane(tblLocalization), GridBag.bigPanel(gridData.getRow(), 2));
 		
 		add(ButtonBarFactory.constructVerticalButtonsPane(
-				new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_ADD, this, "addCallback"),
-				new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_REMOVE, this, "removeCallback")),
+				ButtonBarFactory.addButton(ctx, this), 
+				ButtonBarFactory.removeButton(ctx, this)),
 			GridBag.buttonColumn(2, gridData.getRow(), 1));
 		
 		gridData.setColumnsCount(3);

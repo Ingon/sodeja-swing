@@ -58,7 +58,7 @@ public final class SodejaSwingUtils {
 		if (ctx == null) {
 			Toolkit t = Toolkit.getDefaultToolkit();
 			EventQueue q = t.getSystemEventQueue();
-			AWTEvent e = q.getCurrentEvent();
+			AWTEvent e = EventQueue.getCurrentEvent();
 			if (e == null) {
 				e = q.peekEvent();
 			}
@@ -101,7 +101,7 @@ public final class SodejaSwingUtils {
 		}
 		if (c instanceof JComponent) {
 			JComponent jc = (JComponent) c;
-			JLabel l = (JLabel) jc.getClientProperty("labeledBy");
+			JLabel l = (JLabel) jc.getClientProperty("labeledBy"); //$NON-NLS-1$
 			if (l != null) {
 				l.setVisible(visible);
 			}
