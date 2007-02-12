@@ -19,6 +19,6 @@ public interface ResourceConstants {
 	public static final String LBL_LOCALE = "label.locale";
 	public static final String LBL_VALUE = "label.value";
 	
-	public static final String TH_LOCALE = "theader.locale";
-	public static final String TH_VALUE = "theader.value";
+	public static final String TH_LOCALE = "table_header.locale";
+	public static final String TH_VALUE = "table_header.value";
 }
