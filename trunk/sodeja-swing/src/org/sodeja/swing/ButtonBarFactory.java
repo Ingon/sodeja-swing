@@ -58,6 +58,10 @@ public final class ButtonBarFactory {
     	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_CANCEL, instance, "cancelCallback"); //$NON-NLS-1$
     }
     
+    public static <T extends ApplicationContext> ApplicationAction<T> searchButton(T ctx, Object instance) {
+    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_SEARCH, instance, "searchCallback"); //$NON-NLS-1$
+    }
+
     public static <T extends ApplicationContext> ApplicationAction<T> addButton(T ctx, Object instance) {
     	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_ADD, instance, "addCallback"); //$NON-NLS-1$
     }
@@ -65,9 +69,13 @@ public final class ButtonBarFactory {
     public static <T extends ApplicationContext> ApplicationAction<T> editButton(T ctx, Object instance) {
     	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_EDIT, instance, "editCallback"); //$NON-NLS-1$
     }
-
+    
     public static <T extends ApplicationContext> ApplicationAction<T> removeButton(T ctx, Object instance) {
     	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_REMOVE, instance, "removeCallback"); //$NON-NLS-1$
+    }
+
+    public static <T extends ApplicationContext> ApplicationAction<T> deleteButton(T ctx, Object instance) {
+    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_DELETE, instance, "deleteCallback"); //$NON-NLS-1$
     }
     
     private static JPanel constructButtonsPane(int rows, int cols, ApplicationAction... actions) {
