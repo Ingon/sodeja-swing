@@ -18,6 +18,7 @@ import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.GridBag;
 import org.sodeja.swing.component.action.ApplicationAction;
 import org.sodeja.swing.context.ApplicationContext;
+import org.sodeja.swing.resource.ResourceConstants;
 
 public class PicturePanel<T extends ApplicationContext> extends JComponent {
 
@@ -38,7 +39,7 @@ public class PicturePanel<T extends ApplicationContext> extends JComponent {
 	}
 	
 	private void initComponents() {
-		setBorder(BorderFactory.createTitledBorder("Pictures: "));
+		setBorder(BorderFactory.createTitledBorder(ctx.getResourceProvider().getStringValue(ResourceConstants.TLT_PICTURES)));
 		
 		setLayout(new GridBagLayout());
 		
@@ -56,16 +57,16 @@ public class PicturePanel<T extends ApplicationContext> extends JComponent {
 			GridBag.buttonColumn(1, 1));
 	}
 	
-	// USED through reflection - call local method action
-	@SuppressWarnings("unused")
-	private void addCallback() {
+	protected void addCallback() {
 		JFileChooser chooser = new JFileChooser();
-		chooser.setDialogTitle("Choose image");
+		chooser.setDialogTitle(ctx.getResourceProvider().getStringValue(ResourceConstants.DLG_CHOOSE_IMAGE));
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
 		chooser.setMultiSelectionEnabled(true);
-		chooser.addChoosableFileFilter(new FileNameExtensionFilter("JPEG file", "jpg", "jpeg"));
-		chooser.addChoosableFileFilter(new FileNameExtensionFilter("PNG file", "png"));
+		chooser.addChoosableFileFilter(new FileNameExtensionFilter(
+				ctx.getResourceProvider().getStringValue(ResourceConstants.CMB_FILE_JPEG), "jpg", "jpeg")); //$NON-NLS-1$ //$NON-NLS-2$
+		chooser.addChoosableFileFilter(new FileNameExtensionFilter(
+				ctx.getResourceProvider().getStringValue(ResourceConstants.CMB_FILE_PNG), "png")); //$NON-NLS-1$
 		
 		int result = chooser.showOpenDialog(ctx.getRootFrame());
 		if(result != JFileChooser.APPROVE_OPTION) {
@@ -81,9 +82,7 @@ public class PicturePanel<T extends ApplicationContext> extends JComponent {
 		}
 	}
 
-	// USED through reflection - call local method action
-	@SuppressWarnings("unused")
-	private void removeCallback() {
+	protected void removeCallback() {
 		for(Object value : contentList.getSelectedValues()) {
 			contentModel.removeImage((ImageIcon) value);
 		}
