@@ -4,7 +4,9 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.border.Border;
 
 import org.sodeja.swing.context.ApplicationContext;
 import org.sodeja.swing.event.CallLocalMethodLocaleChangeListener;
@@ -29,6 +31,11 @@ public class LocalizationFactory {
 		labels.add(new WeakReference<JLabel>(lbl));
 		setText(lbl);
 		return lbl;
+	}
+	
+	public Border createBorder(String i18n) {
+		// TODO add some additional behavior here when locale has been changed
+		return BorderFactory.createTitledBorder(ctx.getResourceProvider().getStringValue(i18n));
 	}
 	
 	protected void localeChangedCallback() {

@@ -5,7 +5,6 @@ import java.awt.Image;
 import java.io.File;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
@@ -39,7 +38,7 @@ public class PicturePanel<T extends ApplicationContext> extends JComponent {
 	}
 	
 	private void initComponents() {
-		setBorder(BorderFactory.createTitledBorder(ctx.getResourceProvider().getStringValue(ResourceConstants.TLT_PICTURES)));
+		setBorder(ctx.getLocalizationFactory().createBorder(ResourceConstants.TLT_PICTURES));
 		
 		setLayout(new GridBagLayout());
 		
