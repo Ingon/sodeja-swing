@@ -10,6 +10,7 @@ import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 
 import org.sodeja.dataservice.DataService;
+import org.sodeja.functional.Predicate1;
 import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.ComponentUtils;
 import org.sodeja.swing.GridBag;
@@ -75,6 +76,8 @@ public abstract class DataServiceListPanel<T extends ApplicationContext, R> exte
 
 	protected abstract FormPanel<T, R> createViewForm();	
 
+	protected abstract Predicate1<R> createPredicate(String term);
+	
 	@SuppressWarnings("unchecked")
 	private R getSelectedValue() {
 		int selectedIndex = dataList.getSelectedIndex();
@@ -84,6 +87,10 @@ public abstract class DataServiceListPanel<T extends ApplicationContext, R> exte
 		return (R) dataServiceListModel.getElementAt(selectedIndex);
 	}
 
+	protected void searchCallback() {
+		
+	}
+	
 	protected void addCallback() {
 		if(addFormPanel == null) {
 			addFormPanel = createAddForm();
