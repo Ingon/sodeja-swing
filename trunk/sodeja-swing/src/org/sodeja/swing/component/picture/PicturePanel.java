@@ -9,7 +9,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.sodeja.model.FileResource;
@@ -76,8 +75,7 @@ public class PicturePanel<T extends ApplicationContext> extends JPanel {
 		
 		for(File file : chooser.getSelectedFiles()) {
 			PictureResource resource = new PictureResource(new FileResource(file));
-			int scale = getHeight();
-			resource.scaleImage(scale, scale);
+			resource.scaleImage(150, 150);
 			contentModel.addPicure(resource);
 		}
 	}
@@ -98,10 +96,7 @@ public class PicturePanel<T extends ApplicationContext> extends JPanel {
 	
 	public void setData(List<Resource> images) {
 		contentModel.setResources(images);
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				contentModel.scaleAll(getHeight());				
-			}});
+		contentModel.scaleAll(150);				
 	}
 	
 	@Override
