@@ -1,6 +1,8 @@
 package org.sodeja.swing.resource;
 
 public interface ResourceConstants {
+	public static final String DLG_SEARCH_TERM = "dialog.search.term"; //$NON-NLS-1$
+	
 	public static final String DLG_LOCALIZATION = "dialog.localization"; //$NON-NLS-1$
 	public static final String DLG_LOCALIZATION_ADD = "dialog.localization.add"; //$NON-NLS-1$
 	
