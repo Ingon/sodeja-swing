@@ -34,9 +34,9 @@ public class DataServiceListModel<T> extends AbstractListModel implements DataSe
 	}
 
 	public Object getElementAt(int index) {
-		return internalData.get(index);
+		return getElement(index);
 	}
-
+	
 	public int getSize() {
 		return internalData.size();
 	}
@@ -45,5 +45,9 @@ public class DataServiceListModel<T> extends AbstractListModel implements DataSe
 		int size = internalData.size();
 		internalData = dataService.findAll();
 		fireContentsChanged(this, 0, size);
+	}
+	
+	public T getElement(int index) {
+		return internalData.get(index);
 	}
 }
