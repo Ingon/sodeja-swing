@@ -25,7 +25,7 @@ import org.sodeja.swing.resource.ResourceConstants;
 public abstract class DataServiceListPanel<T extends ApplicationContext, R> extends ApplicationPanel<T> {
 
 	private JList dataList;
-	private JPanel dataPanel;
+	protected JPanel dataPanel;
 	
 	private DataService<R> dataService;
 	private DataServiceListModel<R> dataServiceListModel;
