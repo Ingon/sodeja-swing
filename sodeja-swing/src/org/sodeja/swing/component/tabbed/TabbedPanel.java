@@ -20,6 +20,7 @@ public class TabbedPanel<T extends ApplicationContext> extends ApplicationPanel<
 	
 	private List<TabbedPanelElement> elements;
 	private JTabbedPane tabs;
+	private int selectedIndex = -1;
 	
 	public TabbedPanel(T ctx) {
 		super(ctx);
@@ -33,6 +34,7 @@ public class TabbedPanel<T extends ApplicationContext> extends ApplicationPanel<
 		tabs = new JTabbedPane();
 		tabs.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
+				tabDeselected(selectedIndex);
 				tabSelected(tabs.getSelectedIndex());
 			}
 		});
@@ -46,8 +48,16 @@ public class TabbedPanel<T extends ApplicationContext> extends ApplicationPanel<
 
 	private void tabSelected(int selectedIndex) {
 		elements.get(selectedIndex).tabSelected();
+		this.selectedIndex = selectedIndex;
 	}
 
+	private void tabDeselected(int selectedIndex) {
+		if(selectedIndex == -1) {
+			return;
+		}
+		elements.get(selectedIndex).tabDeselected();
+	}
+	
 	public void localeChanged(Locale oldLocale, Locale newLocale) {
 		for(int i = 0;i < elements.size();i++) {
 			tabs.setTitleAt(i, elements.get(i).getTabName());
