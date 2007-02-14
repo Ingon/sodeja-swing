@@ -18,6 +18,9 @@ public final class ComponentUtils {
 	
 	public static void removeFromContainer(JComponent component) {
 		JComponent parent = (JComponent) component.getParent();
+		if(parent == null) {
+			return;
+		}
 		parent.remove(component);
 		repaint(parent);
 	}

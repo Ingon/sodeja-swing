@@ -21,6 +21,20 @@ public class DataServiceListModel<T> extends AbstractListModel implements DataSe
 		dataService.addDataServiceListener(this);
 	}
 	
+	// AbstractListModel
+	public Object getElementAt(int index) {
+		return getElement(index);
+	}
+	
+	public int getSize() {
+		return internalData.size();
+	}
+	
+	public T getElement(int index) {
+		return internalData.get(index);
+	}
+
+	// DataServiceListener
 	public void created(DataService<T> service, T data) {
 		update();
 	}
@@ -33,21 +47,9 @@ public class DataServiceListModel<T> extends AbstractListModel implements DataSe
 		update();
 	}
 
-	public Object getElementAt(int index) {
-		return getElement(index);
-	}
-	
-	public int getSize() {
-		return internalData.size();
-	}
-	
 	private void update() {
 		int size = internalData.size();
 		internalData = dataService.findAll();
 		fireContentsChanged(this, 0, size);
-	}
-	
-	public T getElement(int index) {
-		return internalData.get(index);
 	}
 }
