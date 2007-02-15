@@ -33,6 +33,14 @@ public class LocalizationFactory {
 		return lbl;
 	}
 	
+	public JLabel createEnumLabel(Enum i18n) {
+		JLabel lbl = new JLabel();
+		lbl.putClientProperty(I18NKey, i18n);
+		labels.add(new WeakReference<JLabel>(lbl));
+		setText(lbl);
+		return lbl;
+	}
+	
 	public Border createBorder(String i18n) {
 		// TODO add some additional behavior here when locale has been changed
 		return BorderFactory.createTitledBorder(ctx.getResourceProvider().getStringValue(i18n));
@@ -48,6 +56,11 @@ public class LocalizationFactory {
 	}
 
 	private void setText(JLabel lbl) {
-		lbl.setText(ctx.getResourceProvider().getStringValue((String) lbl.getClientProperty(I18NKey)));
+		Object i18nProperty = lbl.getClientProperty(I18NKey);
+		if(i18nProperty instanceof Enum) {
+			lbl.setText(ctx.getResourceProvider().getEnumValue((Enum) i18nProperty));
+		} else {
+			lbl.setText(ctx.getResourceProvider().getStringValue((String) i18nProperty));
+		}
 	}
 }
