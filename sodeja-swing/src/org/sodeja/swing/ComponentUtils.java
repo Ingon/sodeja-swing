@@ -42,4 +42,10 @@ public final class ComponentUtils {
 			combo.setSelectedItem(obj);
 		}
 	}
+	
+	public static <E extends Enum> void fillFromEnum(JComboBox combo, Class<E> enumClass) {
+		for(Object obj : enumClass.getEnumConstants()) {
+			combo.addItem(obj);
+		}
+	}
 }
