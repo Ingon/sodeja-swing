@@ -70,6 +70,9 @@ public class DataServiceTreeModel<T> implements TreeModel, DataServiceListener<T
 	}
 
 	public int getIndexOfChild(Object parent, Object child) {
+		if(parent instanceof DataTreeNode) {
+			return ((DataTreeNode) parent).indexOf(child);
+		}
 		throw new UnsupportedOperationException();
 	}
 

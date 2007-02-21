@@ -100,7 +100,7 @@ public class LocalizableResourceDialog<T extends ApplicationContext> extends Nam
 		AddLocalizationDialog<T> dialog = new AddLocalizationDialog<T>(ctx, this);
 		Pair<Locale, String> result = dialog.showAddLocalization();
 		if(result != null) {
-			tblLocalizationModel.addLocale(result.p1, result.p2);
+			tblLocalizationModel.addLocale(result.first, result.second);
 		}
 	}
 	

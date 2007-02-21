@@ -86,4 +86,11 @@ public class DataTreeNode<T> {
 		position -= children.size();
 		return leaves.get(position);
 	}
+
+	public int indexOf(Object child) {
+		if(child instanceof DataTreeNode) {
+			return children.indexOf((DataTreeNode) child);
+		}
+		return children.size() + leaves.indexOf(child);
+	}
 }
