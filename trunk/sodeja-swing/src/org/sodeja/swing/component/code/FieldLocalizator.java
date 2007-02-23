@@ -1,9 +1,9 @@
 package org.sodeja.swing.component.code;
 
+import java.awt.Container;
 import java.awt.GridBagConstraints;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JTextField;
 
 import org.sodeja.swing.GridBag;
@@ -14,7 +14,7 @@ import org.sodeja.swing.resource.ResourceConstants;
 
 public class FieldLocalizator<T extends ApplicationContext> extends TextLocalizator<T> {
 	
-	public FieldLocalizator(T ctx, JComponent container, FormPanelGridData gridData, String lblResource) {
+	public FieldLocalizator(T ctx, Container container, FormPanelGridData gridData, String lblResource) {
 		super(ctx, container, gridData, lblResource);
 		initComponents();
 	}

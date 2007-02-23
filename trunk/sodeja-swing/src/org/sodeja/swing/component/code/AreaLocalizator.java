@@ -1,9 +1,9 @@
 package org.sodeja.swing.component.code;
 
+import java.awt.Container;
 import java.awt.GridBagConstraints;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JTextArea;
 
 import org.sodeja.swing.GridBag;
@@ -15,7 +15,7 @@ import org.sodeja.swing.resource.ResourceConstants;
 public class AreaLocalizator<T extends ApplicationContext> extends TextLocalizator<T> {
 	private double rowWeight;
 	
-	public AreaLocalizator(T ctx, JComponent container, FormPanelGridData gridData, String lblResource, double rowWeight) {
+	public AreaLocalizator(T ctx, Container container, FormPanelGridData gridData, String lblResource, double rowWeight) {
 		super(ctx, container, gridData, lblResource);
 		this.rowWeight = rowWeight;
 		
