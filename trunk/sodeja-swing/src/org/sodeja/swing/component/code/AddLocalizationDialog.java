@@ -1,11 +1,15 @@
 package org.sodeja.swing.component.code;
 
 import java.awt.HeadlessException;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
+import org.sodeja.collections.ListUtils;
 import org.sodeja.functional.Pair;
 import org.sodeja.swing.component.ApplicationDialog;
 import org.sodeja.swing.component.form.FormPanelGridData;
@@ -34,9 +38,15 @@ class AddLocalizationDialog<T extends ApplicationContext> extends NamedFormDialo
 	@Override
 	protected void initComponentsDelegate(FormPanelGridData gridData) {
 		cmbLocales = FormUtils.addLabeledCombo(ctx, this.getContentPane(), ResourceConstants.LBL_LOCALE, gridData);
+		cmbLocales.setRenderer(new LocaleListRenderer(ctx));
 		tfValue = FormUtils.addLabeledField(ctx, this.getContentPane(), ResourceConstants.LBL_VALUE, gridData);
 		
-		for(Locale locale : Locale.getAvailableLocales()) {
+		List<Locale> locales = ListUtils.asList(Locale.getAvailableLocales());
+		Collections.sort(locales, new Comparator<Locale>() {
+			public int compare(Locale o1, Locale o2) {
+				return LocaleListRenderer.getDisplayName(o1, ctx).compareTo(LocaleListRenderer.getDisplayName(o2, ctx));
+			}});
+		for(Locale locale : locales) {
 			cmbLocales.addItem(locale);
 		}
 	}
