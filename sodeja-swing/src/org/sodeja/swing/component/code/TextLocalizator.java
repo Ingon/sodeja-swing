@@ -47,6 +47,7 @@ abstract class TextLocalizator<T extends ApplicationContext> {
 	}
 	
 	public void saveValues() {
+		LocalizationUtils.componentToResource(resource, ctx, tcValue);
 		resource.comitData();
 	}
 	
