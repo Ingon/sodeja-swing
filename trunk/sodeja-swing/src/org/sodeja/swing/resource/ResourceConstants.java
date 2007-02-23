@@ -19,6 +19,8 @@ public interface ResourceConstants {
 	public static final String BTN_DELETE = "button.delete"; //$NON-NLS-1$
 	public static final String BTN_REMOVE = "button.remove"; //$NON-NLS-1$
 	
+	public static final String BTN_DICTIONARY = "button.dictionary"; //$NON-NLS-1$
+
 	public static final String LBL_SYSTEM = "label.system"; //$NON-NLS-1$
 	public static final String LBL_ID = "label.id"; //$NON-NLS-1$
 	public static final String LBL_LOCALE = "label.locale"; //$NON-NLS-1$
