@@ -49,6 +49,10 @@ public class GenericTableModel<T> extends AbstractTableModel {
 		fireTableDataChanged();
 	}
 	
+	public void updateObject(T object) {
+		fireTableDataChanged();
+	}
+	
 	public void removeObject(T object) {
 		data.remove(object);
 		fireTableDataChanged();
