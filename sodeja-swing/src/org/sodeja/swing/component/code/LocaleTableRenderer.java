@@ -6,6 +6,8 @@ import org.sodeja.swing.context.ApplicationContext;
 import org.sodeja.swing.renderer.StringTableCellRenderer;
 
 class LocaleTableRenderer extends StringTableCellRenderer<Locale> {
+	private static final long serialVersionUID = -911779633276934967L;
+	
 	private ApplicationContext ctx;
 	
 	LocaleTableRenderer(ApplicationContext ctx) {
