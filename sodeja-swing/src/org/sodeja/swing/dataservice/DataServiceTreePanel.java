@@ -1,8 +1,12 @@
 package org.sodeja.swing.dataservice;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JComponent;
 import javax.swing.JTree;
 import javax.swing.tree.TreeCellRenderer;
+import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import org.sodeja.dataservice.DataService;
@@ -27,6 +31,7 @@ public abstract class DataServiceTreePanel<T extends ApplicationContext, R> exte
 		dataTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		dataTree.setCellRenderer(getCellRenderer());
 		dataTree.addTreeSelectionListener(new CallLocalMethodTreeSelectionListener(this, "viewCallback")); //$NON-NLS-1$
+		dataTree.addMouseListener(new ClickMouseListener());
 		return dataTree;
 	}
 
@@ -55,5 +60,17 @@ public abstract class DataServiceTreePanel<T extends ApplicationContext, R> exte
 
 	@Override
 	protected void setSelectedValue(R value) {
+	}
+
+	private class ClickMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			TreePath tp = dataTree.getClosestPathForLocation(e.getX(), e.getY());
+			if(tp == null) {
+				return;
+			}
+			
+			viewCallback();
+		}
 	}
 }
