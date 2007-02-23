@@ -1,5 +1,8 @@
 package org.sodeja.swing.dataservice;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
@@ -25,6 +28,7 @@ public abstract class DataServiceListPanel<T extends ApplicationContext, R> exte
 		dataList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		dataList.setCellRenderer(getListCellRenderer());
 		dataList.addListSelectionListener(new CallLocalMethodListSelectionListener(this, "viewCallback")); //$NON-NLS-1$
+		dataList.addMouseListener(new ClickMouseListener());
 		return dataList;
 	}
 	
@@ -46,5 +50,16 @@ public abstract class DataServiceListPanel<T extends ApplicationContext, R> exte
 			return null;
 		}
 		return dataServiceListModel.getElement(selectedIndex);
+	}
+	
+	private class ClickMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			int index = dataList.locationToIndex(e.getPoint());
+			if(index < 0) {
+				return;
+			}
+			viewCallback();
+		}
 	}
 }
