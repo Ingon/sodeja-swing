@@ -2,6 +2,7 @@ package org.sodeja.swing.dataservice;
 
 import org.sodeja.dataservice.DataService;
 import org.sodeja.lang.reflect.ReflectUtils;
+import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.component.form.FormPanel;
 import org.sodeja.swing.component.form.FormPanelGridData;
 import org.sodeja.swing.component.form.FormUtils;
@@ -26,9 +27,14 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 		
 		FormPanelGridData gridData = new FormPanelGridData();
 		gridData.setColumnsCount(columns);
+		
 		FormUtils.standartNamedPreInit(this, ctx, gridData, resourceId);
+		
 		if(type == DataServiceFormPanelType.VIEW) {
 			disableComponents();
+			FormUtils.standartPostInit(this, gridData, ButtonBarFactory.closeToCancelButtons(ctx, this));
+		} else {
+			FormUtils.standartPostInit(this, gridData, getActions());
 		}
 	}
 
@@ -36,6 +42,10 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 	protected void preInitComponents(FormPanelGridData gridData) {
 		columns = gridData.getColumnsCount();
 		gridData.nextRow();
+	}
+
+	@Override
+	protected void postInitComponents(FormPanelGridData gridData) {
 	}
 
 	@Override
@@ -65,6 +75,7 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 	
 	public static abstract class DataServiceFormPanelType {
 		public static final DataServiceFormPanelType ADD = new DataServiceFormPanelType() {
+			@SuppressWarnings("unchecked")
 			@Override
 			protected void doSave(DataService service, Object obj) {
 				service.create(obj);
@@ -76,6 +87,7 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 				throw new UnsupportedOperationException();
 			}};
 		public static final DataServiceFormPanelType EDIT = new DataServiceFormPanelType() {
+			@SuppressWarnings("unchecked")
 			@Override
 			protected void doSave(DataService service, Object obj) {
 				service.update(obj);
