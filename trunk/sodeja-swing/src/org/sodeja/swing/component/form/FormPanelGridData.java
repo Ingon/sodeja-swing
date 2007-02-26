@@ -29,6 +29,10 @@ public class FormPanelGridData {
 	public void moveRows(int count) {
 		row += count;
 	}
+	
+	public void setRow(int row) {
+		this.row = row;
+	}
 
 	public boolean isFillEmpty() {
 		return fillEmpty;
