@@ -15,7 +15,9 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 	private DataService<R> service;
 	private Class<R> dataClazz;
 	protected R dataInstance;
+	
 	private int columns;
+	private int rows;
 	
 	public DataServiceFormPanel(T ctx, DataService<R> service, Class<R> dataClazz, 
 			DataServiceFormPanelType type, String resourceId) {
@@ -30,6 +32,7 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 		
 		FormUtils.standartNamedPreInit(this, ctx, gridData, resourceId);
 		
+		gridData.setRow(rows);
 		if(type == DataServiceFormPanelType.VIEW) {
 			disableComponents();
 			FormUtils.standartPostInit(this, gridData, ButtonBarFactory.closeToCancelButtons(ctx, this));
@@ -46,6 +49,7 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 
 	@Override
 	protected void postInitComponents(FormPanelGridData gridData) {
+		rows = gridData.getRow();
 	}
 
 	@Override
