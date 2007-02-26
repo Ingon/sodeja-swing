@@ -38,7 +38,7 @@ public final class FormUtils {
 		return cmb;
 	}
 	
-	protected static void standartPostInit(Container parent, FormPanelGridData gridData, ApplicationAction[] actions) {
+	public static void standartPostInit(Container parent, FormPanelGridData gridData, ApplicationAction[] actions) {
 		if(gridData.isFillEmpty()) {
 			gridData.nextRow();
 			parent.add(new JPanel(), GridBag.bigPanel(gridData.getRow(), gridData.getColumnsCount()));
@@ -53,7 +53,7 @@ public final class FormUtils {
 			GridBag.buttonLine(gridData.getRow(), gridData.getColumnsCount()));
 	}
 	
-	protected static void standartNamedPreInit(Container cont, ApplicationContext ctx, FormPanelGridData gridData, String resourceName) {
+	public static void standartNamedPreInit(Container cont, ApplicationContext ctx, FormPanelGridData gridData, String resourceName) {
 		JLabel lblName = new JLabel(ctx.getResourceProvider().getStringValue(resourceName));
 		lblName.setFont(lblName.getFont().deriveFont(18f));
 		lblName.setHorizontalAlignment(JLabel.CENTER);
