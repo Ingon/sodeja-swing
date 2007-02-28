@@ -31,4 +31,8 @@ public interface ResourceConstants {
 	
 	public static final String TH_LOCALE = "table_header.locale"; //$NON-NLS-1$
 	public static final String TH_VALUE = "table_header.value"; //$NON-NLS-1$
+
+	public static final String DLG_VALIDATION_FAILED = "dlg.validation.failed"; //$NON-NLS-1$
+	public static final String VM_LOCALIZATION_MISSING = "vm.localization.missing"; //$NON-NLS-1$
+	public static final String VM_LOCALIZATION_COLLISION = "vm.localization.collision"; //$NON-NLS-1$
 }
