@@ -3,18 +3,26 @@ package org.sodeja.swing.component.code;
 import java.awt.Container;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
 import javax.swing.text.JTextComponent;
 
+import org.sodeja.collections.ListUtils;
+import org.sodeja.functional.Predicate1;
+import org.sodeja.lang.StringUtils;
 import org.sodeja.model.DefaultLocalizableResource;
 import org.sodeja.model.LocalizableResource;
 import org.sodeja.swing.component.action.ApplicationAction;
 import org.sodeja.swing.component.form.FormPanelGridData;
 import org.sodeja.swing.context.ApplicationContext;
 import org.sodeja.swing.resource.LocalizationUtils;
+import org.sodeja.swing.resource.ResourceConstants;
+import org.sodeja.swing.validation.FailedValidationMessage;
+import org.sodeja.swing.validation.SuccessfulValidationMessage;
+import org.sodeja.swing.validation.ValidationMessage;
 
 abstract class TextLocalizator<T extends ApplicationContext> {
 
@@ -55,8 +63,35 @@ abstract class TextLocalizator<T extends ApplicationContext> {
 		tcValue.setEditable(enable);
 		actionValue.setEnabled(enable);
 	}
+
+	public <R> ValidationMessage performValidation(List<LocalizableResource> otherResources) {
+		LocalizationUtils.componentToResource(resource, ctx, tcValue);
+		if(StringUtils.isEmpty(resource.getLocalizedValue(ctx.getLocaleProvider().getLocale()))) {
+			return new FailedValidationMessage(ResourceConstants.VM_LOCALIZATION_MISSING);
+		}
+
+		
+		for(final Locale locale : resource.getAvailableLocales()) {
+			final String text = resource.getLocalizedValue(locale);
+			List<LocalizableResource> result = ListUtils.filter(otherResources, 
+				new Predicate1<LocalizableResource>() {
+					public Boolean execute(LocalizableResource p) {
+						if(p == resource.other) {
+							return false;
+						}
+						
+						String value = p.getLocalizedValue(locale);
+						return text.equals(value);
+					}});
+			if(result.size() > 0) {
+				return new FailedValidationMessage(ResourceConstants.VM_LOCALIZATION_COLLISION);
+			}
+		}
+		
+		return new SuccessfulValidationMessage();
+	}
 	
-	private static class PrivateLocalizableResource extends DefaultLocalizableResource {
+	private static final class PrivateLocalizableResource extends DefaultLocalizableResource {
 		
 		private LocalizableResource other;
 		

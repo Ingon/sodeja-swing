@@ -1,6 +1,7 @@
 package org.sodeja.swing.resource;
 
 import java.awt.Image;
+import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -30,7 +31,12 @@ public class DefaultResourceProvider implements ResourceProvider, ApplicationCon
         return bundle.getString(key);
     }
 
-    public String getEnumValue(Enum key) {
+    public String getFormattedStringValue(String key, String[] params) {
+    	String message = getStringValue(key);
+    	return MessageFormat.format(message, params);
+	}
+
+	public String getEnumValue(Enum key) {
 		return getStringValue(key.getDeclaringClass().getName() + "." + key); //$NON-NLS-1$
 	}
 

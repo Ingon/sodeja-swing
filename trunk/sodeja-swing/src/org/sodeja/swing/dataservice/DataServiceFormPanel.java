@@ -7,13 +7,15 @@ import org.sodeja.swing.component.form.FormPanel;
 import org.sodeja.swing.component.form.FormPanelGridData;
 import org.sodeja.swing.component.form.FormUtils;
 import org.sodeja.swing.context.ApplicationContext;
+import org.sodeja.swing.validation.ValidationFailedDialog;
+import org.sodeja.swing.validation.ValidationResult;
 
 public abstract class DataServiceFormPanel<T extends ApplicationContext, R> extends FormPanel<T, R> {
 
 	private DataServiceFormPanelType type;
 	
-	private DataService<R> service;
-	private Class<R> dataClazz;
+	protected DataService<R> service;
+	protected Class<R> dataClazz;
 	protected R dataInstance;
 	
 	private int columns;
@@ -66,6 +68,14 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 
 	@Override
 	protected void okCallback() {
+		ValidationResult validationResult = new ValidationResult();
+		validateData(validationResult);
+		if(! validationResult.isValid()) {
+			new ValidationFailedDialog<T>(ctx, validationResult);
+//			System.out.println("NOT VALID");
+//			// here display messages
+			return;
+		}
 		fillObject(dataInstance);
 		type.doSave(service, dataInstance);
 		super.okCallback();
@@ -76,6 +86,8 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 	protected abstract void fillForm(R object);
 
 	protected abstract void fillObject(R object);
+	
+	protected abstract void validateData(ValidationResult validationResult);
 	
 	public static abstract class DataServiceFormPanelType {
 		public static final DataServiceFormPanelType ADD = new DataServiceFormPanelType() {
