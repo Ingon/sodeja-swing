@@ -5,22 +5,24 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-import org.sodeja.context.ContextImpl;
 import org.sodeja.swing.component.ApplicationFrame;
+import org.sodeja.swing.config.GUIConfiguration;
 import org.sodeja.swing.locale.LocaleProvider;
 import org.sodeja.swing.resource.LocalizationFactory;
 import org.sodeja.swing.resource.ResourceProvider;
 import org.sodeja.swing.validation.ValidationController;
 
-public class DefaultApplicationContext extends ContextImpl implements ApplicationContext {
+public class DefaultApplicationContext implements ApplicationContext {
 
 	private List<ApplicationContextListener> listeners;
 	
 	private LocaleProvider localeProvider;
 	private ResourceProvider resourceProvider;
 	private LocalizationFactory localizationFactory;
+	
 	private ApplicationFrame rootFrame;
 	private ValidationController validationController;
+	private GUIConfiguration guiConfiguration;
 	
 	public DefaultApplicationContext() {
 		listeners = new ArrayList<ApplicationContextListener>();
@@ -97,5 +99,13 @@ public class DefaultApplicationContext extends ContextImpl implements Applicatio
 
 	public void setValidationController(ValidationController validationController) {
 		this.validationController = validationController;
+	}
+
+	public GUIConfiguration getGuiConfiguration() {
+		return guiConfiguration;
+	}
+
+	public void setGuiConfiguration(GUIConfiguration guiConfiguration) {
+		this.guiConfiguration = guiConfiguration;
 	}
 }
