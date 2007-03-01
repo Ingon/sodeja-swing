@@ -1,12 +1,15 @@
 package org.sodeja.swing.component.form;
 
 import java.awt.Container;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
 import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.GridBag;
@@ -61,5 +64,17 @@ public final class FormUtils {
 		cont.add(lblName, GridBag.create(gridData.getRow(), 0, gridData.getColumnsCount(), 1, 1.0, 0.0));
 		
 		gridData.nextRow();
+	}
+	
+	public static void addEscapeListener(JComponent cont, ApplicationContext ctx, Object instance) {
+		KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+		cont.registerKeyboardAction(ButtonBarFactory.closeToCancelButtons(ctx, instance)[0], 
+				stroke, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+	}
+	
+	public static void addCtrlEnterListener(JComponent cont, ApplicationContext ctx, Object instance) {
+		KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.CTRL_DOWN_MASK);
+		cont.registerKeyboardAction(ButtonBarFactory.okButton(ctx, instance), 
+				stroke, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 	}
 }

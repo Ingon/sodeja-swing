@@ -2,6 +2,8 @@ package org.sodeja.swing.validation;
 
 import java.awt.HeadlessException;
 
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import org.sodeja.collections.ArrayUtils;
@@ -9,6 +11,7 @@ import org.sodeja.functional.Function1;
 import org.sodeja.lang.StringUtils;
 import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.GridBag;
+import org.sodeja.swing.SodejaSwingUtils;
 import org.sodeja.swing.component.ApplicationDialog;
 import org.sodeja.swing.component.form.FormPanelGridData;
 import org.sodeja.swing.component.form.FormUtils;
@@ -76,6 +79,9 @@ public class ValidationFailedDialog<T extends ApplicationContext> extends Applic
 	}
 	
 	private void showDialog() {
+		JButton btn = (JButton) ((JPanel) this.getContentPane().getComponent(3)).getComponent(0);
+		SodejaSwingUtils.grabFocus(btn);
+		
 		setVisible(true);
 	}
 }

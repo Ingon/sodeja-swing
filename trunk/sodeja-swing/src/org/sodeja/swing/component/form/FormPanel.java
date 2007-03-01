@@ -9,6 +9,7 @@ import org.sodeja.swing.component.action.ApplicationAction;
 import org.sodeja.swing.context.ApplicationContext;
 
 public abstract class FormPanel<T extends ApplicationContext, R> extends ApplicationPanel<T> {
+	
 	public FormPanel(T ctx) {
 		super(ctx);
 		initComponents();
@@ -21,6 +22,7 @@ public abstract class FormPanel<T extends ApplicationContext, R> extends Applica
 		preInitComponents(gridData);
 		initComponentsDelegate(gridData);
 		postInitComponents(gridData);
+		initKeyboardActions();
 	}
 
 	protected void preInitComponents(FormPanelGridData gridData) {
@@ -35,6 +37,11 @@ public abstract class FormPanel<T extends ApplicationContext, R> extends Applica
 	
 	protected ApplicationAction[] getActions() {
 		return ButtonBarFactory.okCancelButtons(ctx, this);
+	}
+	
+	protected void initKeyboardActions() {
+		FormUtils.addEscapeListener(this, ctx, this);
+		FormUtils.addCtrlEnterListener(this, ctx, this);
 	}
 	
 	public void showForm() {

@@ -39,6 +39,13 @@ public final class SodejaSwingUtils {
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(event);
 	}
 	
+	public static void grabFocus(final JComponent comp) {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				comp.grabFocus();
+			}});
+	}
+	
 	// Peshos
 	public static Frame getRootComponent(Component ctx) {
 		ctx = getComponent(ctx);
