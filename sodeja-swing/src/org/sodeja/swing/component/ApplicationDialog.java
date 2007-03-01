@@ -15,7 +15,7 @@ import org.sodeja.swing.context.ApplicationContextProvider;
 
 public abstract class ApplicationDialog<T extends ApplicationContext> extends JDialog implements ApplicationContextProvider<T> {
 
-	private static final String ACTION_KEY = "ACTION_KEY"; //$NON-NLS-1$
+	private static final String ESCAPE_ACTION_KEY = "ESCAPE_ACTION_KEY"; //$NON-NLS-1$
 
 	protected T ctx;
 	
@@ -51,8 +51,8 @@ public abstract class ApplicationDialog<T extends ApplicationContext> extends JD
         ((JComponent) getContentPane()).setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
         
 		KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
-		this.getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(stroke, ACTION_KEY);
-		this.getRootPane().getActionMap().put(ACTION_KEY, ButtonBarFactory.closeButton(ctx, this));
+		this.getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(stroke, ESCAPE_ACTION_KEY);
+		this.getRootPane().getActionMap().put(ESCAPE_ACTION_KEY, ButtonBarFactory.closeButton(ctx, this));
 	}
 	
     protected abstract void initComponents();
