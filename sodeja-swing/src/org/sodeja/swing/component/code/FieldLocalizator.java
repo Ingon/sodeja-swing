@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import org.sodeja.swing.GridBag;
 import org.sodeja.swing.component.action.CallLocalMethodAction;
@@ -29,5 +30,12 @@ public class FieldLocalizator<T extends ApplicationContext> extends TextLocaliza
 		actionValue = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_DICTIONARY, this, "dictionaryCallback"); //$NON-NLS-1$
 		container.add(new JButton(actionValue), GridBag.create(gridData.getColumnsCount() - 1, gridData.getRow(), 1, 1, 0.0, 0.0,
 				GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL));
+	}
+
+	public void grabFocus() {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				tcValue.grabFocus();
+			}});
 	}
 }

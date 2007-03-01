@@ -33,6 +33,7 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 		gridData.setColumnsCount(columns);
 		
 		FormUtils.standartNamedPreInit(this, ctx, gridData, resourceId);
+		FormUtils.addEscapeListener(this, ctx, this);
 		
 		gridData.setRow(rows);
 		if(type == DataServiceFormPanelType.VIEW) {
@@ -40,6 +41,7 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 			FormUtils.standartPostInit(this, gridData, ButtonBarFactory.closeToCancelButtons(ctx, this));
 		} else {
 			FormUtils.standartPostInit(this, gridData, getActions());
+			FormUtils.addCtrlEnterListener(this, ctx, this);
 		}
 	}
 
@@ -52,6 +54,10 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 	@Override
 	protected void postInitComponents(FormPanelGridData gridData) {
 		rows = gridData.getRow();
+	}
+
+	@Override
+	protected void initKeyboardActions() {
 	}
 
 	@Override
