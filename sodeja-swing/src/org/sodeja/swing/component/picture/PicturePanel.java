@@ -63,12 +63,23 @@ public class PicturePanel<T extends ApplicationContext> extends JPanel {
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
 		chooser.setMultiSelectionEnabled(true);
-		chooser.addChoosableFileFilter(new FileNameExtensionFilter(
-				ctx.getResourceProvider().getStringValue(ResourceConstants.CMB_FILE_JPEG), "jpg", "jpeg")); //$NON-NLS-1$ //$NON-NLS-2$
-		chooser.addChoosableFileFilter(new FileNameExtensionFilter(
-				ctx.getResourceProvider().getStringValue(ResourceConstants.CMB_FILE_PNG), "png")); //$NON-NLS-1$
+		chooser.setCurrentDirectory(new File(ctx.getGuiConfiguration().getFileDialogDirectory()));
+		
+		FileNameExtensionFilter gifFileFilter = new FileNameExtensionFilter(
+						ctx.getResourceProvider().getStringValue(ResourceConstants.CMB_FILE_GIF), "gif"); //$NON-NLS-1$
+		FileNameExtensionFilter pngFileFilter = new FileNameExtensionFilter(
+				ctx.getResourceProvider().getStringValue(ResourceConstants.CMB_FILE_PNG), "png"); //$NON-NLS-1$
+		FileNameExtensionFilter jpgFileFilter = new FileNameExtensionFilter(
+				ctx.getResourceProvider().getStringValue(ResourceConstants.CMB_FILE_JPEG), "jpg", "jpeg"); //$NON-NLS-1$ //$NON-NLS-2$
+		
+		chooser.addChoosableFileFilter(gifFileFilter); 
+		chooser.addChoosableFileFilter(pngFileFilter); 
+		chooser.addChoosableFileFilter(jpgFileFilter); 
 		
 		int result = chooser.showOpenDialog(ctx.getRootFrame());
+		
+		ctx.getGuiConfiguration().setFileDialogDirectory(chooser.getCurrentDirectory().getAbsolutePath());
+		
 		if(result != JFileChooser.APPROVE_OPTION) {
 			return;
 		}

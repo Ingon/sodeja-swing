@@ -13,6 +13,7 @@ import javax.swing.Timer;
 import org.sodeja.swing.context.ApplicationContext;
 import org.sodeja.swing.context.ApplicationContextListener;
 
+// TODO panels should be migrated to this?
 public class ValidationController implements ApplicationContextListener {
 	
     private Timer timer;

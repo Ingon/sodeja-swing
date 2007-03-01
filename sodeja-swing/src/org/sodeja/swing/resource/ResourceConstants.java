@@ -28,6 +28,7 @@ public interface ResourceConstants {
 
 	public static final String CMB_FILE_JPEG = "combobox.file.jpeg"; //$NON-NLS-1$
 	public static final String CMB_FILE_PNG = "combobox.file.png"; //$NON-NLS-1$
+	public static final String CMB_FILE_GIF = "combobox.file.gif"; //$NON-NLS-1$
 	
 	public static final String TH_LOCALE = "table_header.locale"; //$NON-NLS-1$
 	public static final String TH_VALUE = "table_header.value"; //$NON-NLS-1$
