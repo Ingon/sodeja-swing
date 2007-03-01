@@ -2,6 +2,7 @@ package org.sodeja.swing.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -65,5 +66,9 @@ public class GenericTableModel<T> extends AbstractTableModel {
 	public void removeObject(int index) {
 		data.remove(index);
 		fireTableDataChanged();
+	}
+	
+	public List<T> getData() {
+		return Collections.unmodifiableList(data);
 	}
 }

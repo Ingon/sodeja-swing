@@ -46,6 +46,7 @@ public abstract class DataServiceTreePanel<T extends ApplicationContext, R> exte
 		dataTree.clearSelection();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected R getSelectedValue() {
 		if(dataTree.getSelectionPath() == null) {

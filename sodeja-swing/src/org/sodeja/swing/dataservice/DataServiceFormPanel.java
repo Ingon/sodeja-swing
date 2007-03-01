@@ -72,8 +72,6 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 		validateData(validationResult);
 		if(! validationResult.isValid()) {
 			new ValidationFailedDialog<T>(ctx, validationResult);
-//			System.out.println("NOT VALID");
-//			// here display messages
 			return;
 		}
 		fillObject(dataInstance);

@@ -56,6 +56,7 @@ public class DataTreeNode<T> {
 		leaves.add(data);
 	}
 	
+	@SuppressWarnings("unchecked")
 	List<DataTreeNode<T>> getPath(T searchLeaf) {
 		for(T leaf : leaves) {
 			if(leaf.equals(searchLeaf)) {
