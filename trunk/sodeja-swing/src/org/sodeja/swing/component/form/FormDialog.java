@@ -1,6 +1,10 @@
 package org.sodeja.swing.component.form;
 
 import java.awt.HeadlessException;
+import java.awt.event.KeyEvent;
+
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 
 import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.component.ApplicationDialog;
@@ -10,6 +14,8 @@ import org.sodeja.swing.context.ApplicationContext;
 
 public abstract class FormDialog<T extends ApplicationContext> extends ApplicationDialog<T> {
 
+	private static final String ENTER_ACTION_KEY = "ENTER_ACTION_KEY"; //$NON-NLS-1$
+	
 	public FormDialog(T ctxCons) throws HeadlessException {
 		super(ctxCons);
 	}
@@ -31,6 +37,9 @@ public abstract class FormDialog<T extends ApplicationContext> extends Applicati
 	}
 
 	protected void preInitComponents(FormPanelGridData gridData) {
+		KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.CTRL_DOWN_MASK);
+		this.getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(stroke, ENTER_ACTION_KEY);
+		this.getRootPane().getActionMap().put(ENTER_ACTION_KEY, ButtonBarFactory.okButton(ctx, this));
 	}
 
 	protected abstract void initComponentsDelegate(FormPanelGridData gridData);
