@@ -2,24 +2,32 @@ package org.sodeja.swing.renderer;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
+import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
+import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.TableCellRenderer;
 
 import org.sodeja.functional.Pair;
 import org.sodeja.functional.Predicate1;
 import org.sodeja.swing.context.ApplicationContext;
 
-public class CheckBoxTableCellRenderer<T extends ApplicationContext> extends JCheckBox implements TableCellRenderer {
+public class CheckBoxTableCellRenderer<T extends ApplicationContext> extends JPanel implements TableCellRenderer {
 	private static final long serialVersionUID = -7675705979343419313L;
 	
 	private T ctx;
 	private Pair<Color, Color> scheme;
+	private JCheckBox chkDelegate;
 	
 	private Predicate1 functor;
 	
 	public CheckBoxTableCellRenderer(T ctx) {
+		super(new GridBagLayout());
 		this.ctx = ctx;
 		
 		functor = new Predicate1<Boolean>() {
@@ -29,6 +37,12 @@ public class CheckBoxTableCellRenderer<T extends ApplicationContext> extends JCh
 		};
 
 		scheme = RendererUtils.makeColors(ctx, this);
+		
+		setBorder(BorderFactory.createEmptyBorder());
+		chkDelegate = new JCheckBox();
+		chkDelegate.setVerticalAlignment(SwingConstants.CENTER);
+		add(chkDelegate, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, 
+				GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 	}
 	
 	public CheckBoxTableCellRenderer(Predicate1 functor) {
@@ -43,7 +57,10 @@ public class CheckBoxTableCellRenderer<T extends ApplicationContext> extends JCh
 			this.setBackground(table.getBackground());
 		}
 
-		setSelected((Boolean) functor.execute(value));
+		chkDelegate.setSelected((Boolean) functor.execute(value));
+		table.setRowHeight(row, chkDelegate.getPreferredSize().height);
+		
+		RendererUtils.setProperBorder(this, isSelected, hasFocus);
 		
 		return this;
 	}
