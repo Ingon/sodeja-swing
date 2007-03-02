@@ -8,11 +8,11 @@ import javax.swing.filechooser.FileSystemView;
 public class GUIConfiguration {
 	
 	private String fileDialogDirectory;
-	private Map<String, String> properties;
+	private Map<String, Object> properties;
 	
 	public GUIConfiguration() {
 		fileDialogDirectory = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
-		properties = new HashMap<String, String>();
+		properties = new HashMap<String, Object>();
 	}
 	
 	public String getFileDialogDirectory() {
@@ -23,11 +23,11 @@ public class GUIConfiguration {
 		this.fileDialogDirectory = fileDialogDirectory;
 	}
 	
-	public String get(String key) {
+	public Object get(String key) {
 		return properties.get(key);
 	}
 	
-	public String set(String key, String value) {
+	public Object set(String key, Object value) {
 		return properties.put(key, value);
 	}
 }
