@@ -36,11 +36,14 @@ public abstract class MultyLineTableCellRenderer<T extends ApplicationContext, R
 	public abstract String getTextDelegate(R t);
 	
 	private void updateRowHeight(JTable table, int row) {
-		int size = this.getText().split("\r\n").length;
-		if(size == 1) {
-			table.setRowHeight(row, getRowHeight() + 6);
-		} else if(size > 1) {
-			table.setRowHeight(row, getRowHeight() * size + 6);
+		int size = this.getText().split("\r\n").length; //$NON-NLS-1$
+		int newRowHeight = getRowHeight() + 6;
+		if(size > 1) {
+			newRowHeight = getRowHeight() * size + 6;
+		}
+		
+		if(table.getRowHeight(row) < newRowHeight) {
+			table.setRowHeight(row, newRowHeight);
 		}
 	}
 }
