@@ -6,9 +6,9 @@ package org.sodeja.swing.component.code;
 import java.util.Locale;
 
 import org.sodeja.swing.context.ApplicationContext;
-import org.sodeja.swing.renderer.StringListRenderer;
+import org.sodeja.swing.renderer.ExtractStringListRenderer;
 
-class LocaleListRenderer extends StringListRenderer<Locale> {
+class LocaleListRenderer extends ExtractStringListRenderer<Locale> {
 	private static final long serialVersionUID = -6284862581490326146L;
 	
 	private ApplicationContext ctx;

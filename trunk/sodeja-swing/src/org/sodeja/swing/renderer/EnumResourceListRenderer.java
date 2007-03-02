@@ -2,7 +2,7 @@ package org.sodeja.swing.renderer;
 
 import org.sodeja.swing.context.ApplicationContext;
 
-public class EnumResourceListRenderer<E extends Enum> extends StringListRenderer<E> {
+public class EnumResourceListRenderer<E extends Enum> extends ExtractStringListRenderer<E> {
 	
 	private static final long serialVersionUID = -5030405234852587553L;
 	

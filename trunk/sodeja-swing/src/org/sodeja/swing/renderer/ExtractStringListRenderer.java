@@ -5,7 +5,7 @@ import java.awt.Component;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 
-public abstract class StringListRenderer<T> extends DefaultListCellRenderer {
+public abstract class ExtractStringListRenderer<T> extends DefaultListCellRenderer {
 	@SuppressWarnings("unchecked")
 	public Component getListCellRendererComponent(JList list, Object value,
 			int index, boolean isSelected, boolean cellHasFocus) {
