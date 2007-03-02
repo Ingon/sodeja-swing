@@ -3,6 +3,7 @@ package org.sodeja.swing.renderer;
 import java.awt.Color;
 import java.awt.Component;
 
+import javax.swing.BorderFactory;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.TableCellRenderer;
@@ -18,6 +19,7 @@ public abstract class MultyLineTableCellRenderer<T extends ApplicationContext, R
 	public MultyLineTableCellRenderer(T ctx) {
 		this.ctx = ctx;
 		scheme = RendererUtils.makeColors(ctx, this);
+		setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -11,7 +11,7 @@ public class RendererUtils {
 	private RendererUtils() {
 	}
 	
-	public static final String ODD_COLOR = "ODD_COLOR";
+	public static final String ODD_COLOR = "ODD_COLOR"; //$NON-NLS-1$
 	
 	protected static Pair<Color, Color> makeColors(ApplicationContext ctx, JComponent component) {
 		Color defaultBackground = component.getBackground();

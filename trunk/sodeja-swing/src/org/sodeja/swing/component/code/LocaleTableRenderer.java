@@ -8,8 +8,6 @@ import org.sodeja.swing.renderer.ExtractStringTableCellRenderer;
 class LocaleTableRenderer<T extends ApplicationContext> extends ExtractStringTableCellRenderer<T, Locale> {
 	private static final long serialVersionUID = -911779633276934967L;
 	
-	private T ctx;
-	
 	LocaleTableRenderer(T ctx) {
 		super(ctx);
 	}
