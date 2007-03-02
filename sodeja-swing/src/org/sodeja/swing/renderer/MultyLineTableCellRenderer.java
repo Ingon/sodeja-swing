@@ -32,6 +32,8 @@ public abstract class MultyLineTableCellRenderer<T extends ApplicationContext, R
 		setText(text);
 		updateRowHeight(table, row);
 		
+		RendererUtils.setProperBorder(this, isSelected, hasFocus);
+		
 		return this;
 	}
 
