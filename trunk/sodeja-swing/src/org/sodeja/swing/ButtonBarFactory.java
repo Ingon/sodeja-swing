@@ -45,9 +45,11 @@ public final class ButtonBarFactory {
     }
     
     public static <T extends ApplicationContext> ApplicationAction[] closeToCancelButtons(T ctx, Object instance) {
-    	return new ApplicationAction[] {
-				new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_CLOSE, instance, "cancelCallback"), //$NON-NLS-1$
-    	};
+    	return new ApplicationAction[] {closeToCancelButton(ctx, instance)};
+    }
+    
+    public static <T extends ApplicationContext> ApplicationAction closeToCancelButton(T ctx, Object instance) {
+    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_CLOSE, instance, "cancelCallback"); //$NON-NLS-1$
     }
     
     public static <T extends ApplicationContext> ApplicationAction<T> okButton(T ctx, Object instance) {

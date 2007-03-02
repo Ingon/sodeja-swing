@@ -37,6 +37,8 @@ public abstract class FormDialog<T extends ApplicationContext> extends Applicati
 	}
 
 	protected void preInitComponents(FormPanelGridData gridData) {
+		this.getRootPane().getActionMap().put(ESCAPE_ACTION_KEY, ButtonBarFactory.closeToCancelButton(ctx, this));
+		
 		KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.CTRL_DOWN_MASK);
 		this.getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(stroke, ENTER_ACTION_KEY);
 		this.getRootPane().getActionMap().put(ENTER_ACTION_KEY, ButtonBarFactory.okButton(ctx, this));
