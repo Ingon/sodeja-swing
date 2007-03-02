@@ -15,7 +15,7 @@ import org.sodeja.swing.context.ApplicationContextProvider;
 
 public abstract class ApplicationDialog<T extends ApplicationContext> extends JDialog implements ApplicationContextProvider<T> {
 
-	private static final String ESCAPE_ACTION_KEY = "ESCAPE_ACTION_KEY"; //$NON-NLS-1$
+	protected static final String ESCAPE_ACTION_KEY = "ESCAPE_ACTION_KEY"; //$NON-NLS-1$
 
 	protected T ctx;
 	

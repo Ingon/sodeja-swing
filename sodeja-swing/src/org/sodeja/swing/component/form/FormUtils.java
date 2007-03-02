@@ -68,7 +68,7 @@ public final class FormUtils {
 	
 	public static void addEscapeListener(JComponent cont, ApplicationContext ctx, Object instance) {
 		KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
-		cont.registerKeyboardAction(ButtonBarFactory.closeToCancelButtons(ctx, instance)[0], 
+		cont.registerKeyboardAction(ButtonBarFactory.closeToCancelButton(ctx, instance), 
 				stroke, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 	}
 	
