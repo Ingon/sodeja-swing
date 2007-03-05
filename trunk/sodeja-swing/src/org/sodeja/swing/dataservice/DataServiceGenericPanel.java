@@ -1,6 +1,7 @@
 package org.sodeja.swing.dataservice;
 
 import java.awt.GridBagLayout;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JComponent;
@@ -77,6 +78,8 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 	protected abstract FormPanel<T, R> createViewForm();	
 
 	protected abstract Predicate1<R> createPredicate(String term);
+	
+	protected abstract Comparator<R> createComparator();
 	
 	protected void searchCallback() {
 		String term = JOptionPane.showInputDialog(ctx.getRootFrame(), 

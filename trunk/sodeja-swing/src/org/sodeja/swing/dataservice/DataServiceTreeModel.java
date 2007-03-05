@@ -1,6 +1,8 @@
 package org.sodeja.swing.dataservice;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.event.TreeModelEvent;
@@ -17,10 +19,14 @@ public class DataServiceTreeModel<T> implements TreeModel, DataServiceListener<T
 	private DataTreeNode<T> rootNode;
 	private DataService<T> dataService;
 	private DataPathExtractor<T> extractor;
+	private Comparator<T> comparator;
 	
-	public DataServiceTreeModel(DataService<T> dataService, String rootNodeStr, DataPathExtractor<T> extractor) {
+	public DataServiceTreeModel(DataService<T> dataService, String rootNodeStr, 
+			DataPathExtractor<T> extractor, Comparator<T> comparator) {
 		this.dataService = dataService;
 		this.extractor = extractor;
+		this.comparator = comparator;
+		
 		listeners = new ArrayList<TreeModelListener>();		
 		
 		rootNode = new DataTreeNode<T>(rootNodeStr);
@@ -30,7 +36,9 @@ public class DataServiceTreeModel<T> implements TreeModel, DataServiceListener<T
 	}
 	
 	private void initNodes() {
-		for(T obj : dataService.findAll()) {
+		List<T> elements = new ArrayList<T>(dataService.findAll());
+		Collections.sort(elements, comparator);
+		for(T obj : elements) {
 			addLeaf(obj);
 		}
 	}

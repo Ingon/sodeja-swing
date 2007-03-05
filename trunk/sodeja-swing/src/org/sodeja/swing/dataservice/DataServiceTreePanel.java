@@ -26,7 +26,7 @@ public abstract class DataServiceTreePanel<T extends ApplicationContext, R> exte
 
 	@Override
 	protected JComponent initObjectsComponent() {
-		dataModel = new DataServiceTreeModel<R>(dataService, getRootNode(), getExtractor());
+		dataModel = new DataServiceTreeModel<R>(dataService, getRootNode(), getExtractor(), createComparator());
 		dataTree = new JTree(dataModel);
 		dataTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		dataTree.setCellRenderer(getCellRenderer());
