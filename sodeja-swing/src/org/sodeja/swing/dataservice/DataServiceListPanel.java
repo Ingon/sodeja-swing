@@ -23,7 +23,7 @@ public abstract class DataServiceListPanel<T extends ApplicationContext, R> exte
 
 	@Override
 	protected JComponent initObjectsComponent() {
-		dataServiceListModel = new DataServiceListModel<R>(dataService);
+		dataServiceListModel = new DataServiceListModel<R>(dataService, createComparator());
 		dataList = new JList(dataServiceListModel);
 		dataList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		dataList.setCellRenderer(getListCellRenderer());

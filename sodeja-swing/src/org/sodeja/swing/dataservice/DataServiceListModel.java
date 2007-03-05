@@ -1,5 +1,8 @@
 package org.sodeja.swing.dataservice;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.AbstractListModel;
@@ -13,11 +16,15 @@ public class DataServiceListModel<T> extends AbstractListModel implements DataSe
 	
 	private List<T> internalData;
 	private DataService<T> dataService;
+	private Comparator<T> comparator;
 	
-	public DataServiceListModel(DataService<T> dataService) {
+	public DataServiceListModel(DataService<T> dataService, Comparator<T> comparator) {
 		this.dataService = dataService;
+		this.comparator = comparator;
 		
-		internalData = dataService.findAll();
+		internalData = new ArrayList<T>(dataService.findAll());
+		Collections.sort(internalData, comparator);
+		
 		dataService.addDataServiceListener(this);
 	}
 	
@@ -49,7 +56,11 @@ public class DataServiceListModel<T> extends AbstractListModel implements DataSe
 
 	private void update() {
 		int size = internalData.size();
-		internalData = dataService.findAll();
+		
+		internalData.clear();
+		internalData.addAll(dataService.findAll());
+		
+		Collections.sort(internalData, comparator);
 		fireContentsChanged(this, 0, size);
 	}
 }
