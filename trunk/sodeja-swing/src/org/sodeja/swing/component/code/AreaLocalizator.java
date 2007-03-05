@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.GridBagConstraints;
 
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import org.sodeja.swing.GridBag;
@@ -27,7 +28,7 @@ public class AreaLocalizator<T extends ApplicationContext> extends TextLocalizat
 				GridBag.lineLabel(gridData.getRow()));
 		
 		tcValue = new JTextArea();
-		container.add(tcValue, GridBag.create(1, gridData.getRow(), gridData.getColumnsCount() - 2, 1, 1.0, rowWeight));
+		container.add(new JScrollPane(tcValue), GridBag.create(1, gridData.getRow(), gridData.getColumnsCount() - 2, 1, 1.0, rowWeight));
 		
 		actionValue = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_DICTIONARY, this, "dictionaryCallback"); //$NON-NLS-1$
 		container.add(new JButton(actionValue), GridBag.create(gridData.getColumnsCount() - 1, gridData.getRow(), 1, 1, 0.0, 0.0,
