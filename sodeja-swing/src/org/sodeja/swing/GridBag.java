@@ -45,6 +45,10 @@ public class GridBag {
         return bigPanel(0, gridy, gridwidth, 1);
     }
 
+    public static GridBagConstraints bigPanelHeight(int height) {
+    	return bigPanel(0, 0, 1, height);
+    }
+    
     private static GridBagConstraints bigPanel(int gridx, int gridy, int gridwidth, int gridheight) {
         return create(gridx, gridy, gridwidth, gridheight, 1.0, 1.0);
     }
@@ -58,9 +62,17 @@ public class GridBag {
     }
 
     public static GridBagConstraints separatorLine(int gridy, int gridWidth) {
-    	return create(0, gridy, gridWidth, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL);
+    	return separatorLine(0, gridy, gridWidth);
     }
     
+	public static GridBagConstraints separatorLine(int gridx, int gridy, int gridWidth) {
+    	return create(gridx, gridy, gridWidth, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL);
+	}
+
+	public static GridBagConstraints separatorLineFixed(int gridx, int gridy, int gridWidth) {
+    	return create(gridx, gridy, gridWidth, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL);
+	}
+	
     public static GridBagConstraints lineLabel(int gridy) {
         return line(0, gridy, 0.0);
     }
@@ -121,6 +133,10 @@ public class GridBag {
         return buttonColumn(gridx, 0, gridheight);
     }
 
+    public static GridBagConstraints buttonColumnFixed(int gridx, int gridheight) {
+        return create(gridx, 0, 1, gridheight, 0.0, 0.0, GridBagConstraints.NORTH, GridBagConstraints.NONE);
+    }
+    
     public static GridBagConstraints buttonColumn(int gridx, int gridy, int gridheight) {
         return create(gridx, gridy, 1, gridheight, 0.0, 1.0, GridBagConstraints.NORTH, GridBagConstraints.NONE);
     }
