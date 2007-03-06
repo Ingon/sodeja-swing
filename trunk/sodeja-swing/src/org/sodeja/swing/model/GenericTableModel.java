@@ -72,8 +72,34 @@ public class GenericTableModel<T> extends AbstractTableModel {
 		data.remove(index);
 		fireTableDataChanged();
 	}
+
+	public void removeObjects(int[] indexes) {
+		if(indexes == null) {
+			return;
+		}
+		
+		for(int i = indexes.length - 1;i >= 0;i--) {
+			data.remove(indexes[i]);
+		}
+		
+		fireTableDataChanged();
+	}
 	
 	public List<T> getData() {
 		return Collections.unmodifiableList(data);
+	}
+	
+	public void moveUp(int[] indexes) {
+		if(indexes == null) {
+			return;
+		}
+		throw new UnsupportedOperationException();
+	}
+
+	public void moveDown(int[] indexes) {
+		if(indexes == null) {
+			return;
+		}
+		throw new UnsupportedOperationException();
 	}
 }
