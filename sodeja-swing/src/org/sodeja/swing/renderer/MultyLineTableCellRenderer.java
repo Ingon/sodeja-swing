@@ -46,7 +46,7 @@ public abstract class MultyLineTableCellRenderer<T extends ApplicationContext, R
 			newRowHeight = getRowHeight() * size + 6;
 		}
 		
-		if(table.getRowHeight(row) < newRowHeight) {
+		if(table.getRowHeight(row) < newRowHeight || row == 0) {
 			table.setRowHeight(row, newRowHeight);
 		}
 	}

@@ -49,6 +49,11 @@ public class GenericTableModel<T> extends AbstractTableModel {
 		data.add(object);
 		fireTableDataChanged();
 	}
+
+	public void addObjects(Collection<T> objects) {
+		data.addAll(objects);
+		fireTableDataChanged();
+	}
 	
 	public void updateObject(T object) {
 		fireTableDataChanged();
