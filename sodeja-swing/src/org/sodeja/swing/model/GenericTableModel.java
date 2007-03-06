@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import org.sodeja.collections.ArrayUtils;
 import org.sodeja.collections.ListUtils;
 import org.sodeja.functional.Function1;
 
@@ -74,7 +75,7 @@ public class GenericTableModel<T> extends AbstractTableModel {
 	}
 
 	public void removeObjects(int[] indexes) {
-		if(indexes == null) {
+		if(ArrayUtils.isEmpty(indexes)) {
 			return;
 		}
 		
@@ -90,16 +91,18 @@ public class GenericTableModel<T> extends AbstractTableModel {
 	}
 	
 	public void moveUp(int[] indexes) {
-		if(indexes == null) {
+		if(ArrayUtils.isEmpty(indexes)) {
 			return;
 		}
+		
 		throw new UnsupportedOperationException();
 	}
 
 	public void moveDown(int[] indexes) {
-		if(indexes == null) {
+		if(ArrayUtils.isEmpty(indexes)) {
 			return;
 		}
+		
 		throw new UnsupportedOperationException();
 	}
 }
