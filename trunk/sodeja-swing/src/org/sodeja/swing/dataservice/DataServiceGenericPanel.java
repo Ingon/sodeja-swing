@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.SwingUtilities;
 
 import org.sodeja.dataservice.DataService;
 import org.sodeja.functional.Predicate1;
@@ -107,7 +108,11 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		}
 		
 		addFormPanel.showForm();
-		ComponentUtils.swapInContainer(dataPanel, addFormPanel, GridBag.bigPanel());
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				ComponentUtils.swapInContainer(dataPanel, addFormPanel, GridBag.bigPanel());
+			}});
 	}
 	
 	protected void editCallback() {
@@ -122,7 +127,10 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		}
 		
 		editFormPanel.showForm(value);
-		ComponentUtils.swapInContainer(dataPanel, editFormPanel, GridBag.bigPanel());
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				ComponentUtils.swapInContainer(dataPanel, editFormPanel, GridBag.bigPanel());
+			}});
 	}
 	
 	protected void viewCallback() {
@@ -137,7 +145,10 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		}
 		
 		viewFormPanel.showForm(value);
-		ComponentUtils.swapInContainer(dataPanel, viewFormPanel, GridBag.bigPanel());
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				ComponentUtils.swapInContainer(dataPanel, viewFormPanel, GridBag.bigPanel());
+			}});
 	}
 	
 	protected void deleteCallback() {

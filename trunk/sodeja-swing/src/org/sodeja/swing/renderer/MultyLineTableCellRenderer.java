@@ -30,7 +30,6 @@ public abstract class MultyLineTableCellRenderer<T extends ApplicationContext, R
 		
 		String text = getTextDelegate((R) value);
 		setText(text);
-		updateRowHeight(table, row);
 		
 		RendererUtils.setProperBorder(this, isSelected, hasFocus);
 		
@@ -38,16 +37,4 @@ public abstract class MultyLineTableCellRenderer<T extends ApplicationContext, R
 	}
 
 	public abstract String getTextDelegate(R t);
-	
-	private void updateRowHeight(JTable table, int row) {
-		int size = this.getText().split("\r\n").length; //$NON-NLS-1$
-		int newRowHeight = getRowHeight() + 6;
-		if(size > 1) {
-			newRowHeight = getRowHeight() * size + 6;
-		}
-		
-		if(table.getRowHeight(row) < newRowHeight || row == 0) {
-			table.setRowHeight(row, newRowHeight);
-		}
-	}
 }

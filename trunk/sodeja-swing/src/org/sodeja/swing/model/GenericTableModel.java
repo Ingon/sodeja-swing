@@ -44,6 +44,7 @@ public class GenericTableModel<T> extends AbstractTableModel {
 	public void copyFrom(Collection<T> target) {
 		data.clear();
 		data.addAll(target);
+		fireTableDataChanged();
 	}
 	
 	public void addObject(T object) {

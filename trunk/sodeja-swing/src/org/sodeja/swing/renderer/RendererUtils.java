@@ -15,7 +15,9 @@ public class RendererUtils {
 	}
 	
 	public static final String ODD_COLOR = "ODD_COLOR"; //$NON-NLS-1$
-	private static final Border noFocusBorder = new EmptyBorder(1, 1, 1, 1); 
+	public static final String TABLE_ROW_HEIGHT = "TABLE_ROW_HEIGHT"; //$NON-NLS-1$
+	
+	private static final Border noFocusBorder = new EmptyBorder(1, 1, 1, 1);
 	
 	protected static Pair<Color, Color> makeColors(ApplicationContext ctx, JComponent component) {
 		Color defaultBackground = component.getBackground();
