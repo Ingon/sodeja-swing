@@ -57,7 +57,7 @@ public class LocalizableResourceDialog<T extends ApplicationContext> extends Nam
 		tblLocalization = new JTable(tblLocalizationModel);
 		tblLocalization.getColumnModel().getColumn(0).setHeaderValue(
 				ctx.getResourceProvider().getStringValue(ResourceConstants.TH_LOCALE));
-		tblLocalization.getColumnModel().getColumn(0).setCellRenderer(new LocaleTableRenderer(ctx));
+		tblLocalization.getColumnModel().getColumn(0).setCellRenderer(new LocaleTableRenderer<T>(ctx));
 		
 		tblLocalization.getColumnModel().getColumn(1).setHeaderValue(
 				ctx.getResourceProvider().getStringValue(ResourceConstants.TH_VALUE));

@@ -64,7 +64,10 @@ class LocalizableResourceTableModel extends AbstractTableModel {
 	}
 	
 	public void addLocale(Locale locale, String value) {
-		locales.add(locale);
+		if(! locales.contains(locale)) {
+			locales.add(locale);
+		}
+		
 		i18n.put(locale, value);
 		
 		fireTableDataChanged();
