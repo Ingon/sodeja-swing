@@ -19,6 +19,8 @@ import org.sodeja.swing.component.ApplicationPanel;
 import org.sodeja.swing.component.form.FormPanel;
 import org.sodeja.swing.context.ApplicationContext;
 import org.sodeja.swing.resource.ResourceConstants;
+import org.sodeja.swing.validation.ValidationFailedDialog;
+import org.sodeja.swing.validation.ValidationResult;
 
 public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> extends ApplicationPanel<T> {
 
@@ -81,6 +83,9 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 	
 	protected abstract Comparator<R> createComparator();
 	
+	protected void validateDelete(R value, ValidationResult validation) {
+	}
+	
 	protected void searchCallback() {
 		String term = JOptionPane.showInputDialog(ctx.getRootFrame(), 
 				ctx.getResourceProvider().getStringValue(ResourceConstants.DLG_SEARCH_TERM));
@@ -138,6 +143,13 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 	protected void deleteCallback() {
 		R value = getSelectedValue();
 		if(value == null) {
+			return;
+		}
+		
+		ValidationResult validationResult = new ValidationResult();
+		validateDelete(value, validationResult);
+		if(! validationResult.isValid()) {
+			new ValidationFailedDialog<T>(ctx, validationResult);
 			return;
 		}
 		
