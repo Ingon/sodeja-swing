@@ -51,7 +51,7 @@ class LocalizableResourceTableModel extends AbstractTableModel {
 		i18n.put(locale	, (String) value);
 	}
 
-	private Locale getLocale(int index) {
+	protected Locale getLocale(int index) {
 		return locales.get(index);
 	}
 	

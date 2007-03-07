@@ -95,14 +95,69 @@ public class GenericTableModel<T> extends AbstractTableModel {
 			return;
 		}
 		
-		throw new UnsupportedOperationException();
+		moveBlocks(divideOnBlocks(indexes), -1);
 	}
 
 	public void moveDown(int[] indexes) {
 		if(ArrayUtils.isEmpty(indexes)) {
 			return;
 		}
+
+		moveBlocks(divideOnBlocks(indexes), 1);
+	}
+	
+	private List<List<Integer>> divideOnBlocks(int[] indexes) {
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
 		
-		throw new UnsupportedOperationException();
+		for(int i = 0;i < indexes.length;i++) {
+			if(result.isEmpty()) {
+				result.add(new ArrayList<Integer>());
+			}
+			List<Integer> block = ListUtils.last(result);
+			if(block.isEmpty()) {
+				block.add(indexes[i]);
+				continue;
+			}
+			
+			int prev = ListUtils.last(block);
+			if(prev + 1 == indexes[i]) {
+				block.add(indexes[i]);
+				continue;
+			}
+			
+			List<Integer> newBlock = new ArrayList<Integer>();
+			newBlock.add(indexes[i]);
+			result.add(newBlock);
+		}
+		
+		return result;
+	}
+
+	private void moveBlocks(List<List<Integer>> blocks, int factor) {
+		for(List<Integer> block : blocks) {
+			moveBlock(block, factor);
+		}
+	}
+	
+	private void moveBlock(List<Integer> block, int factor) {
+		List<T> objects = new ArrayList<T>();
+		for(int i = block.size() - 1;i >= 0;i--) {
+			objects.add(data.remove((int) block.get(i)));
+		}
+		
+		Collections.reverse(objects);
+		
+		int newPos = ListUtils.first(block) + factor;
+		if(newPos < 0) {
+			newPos = 0;
+		}
+		
+		for(int i = 0, n = block.size();i < n;i++) {
+			if(newPos > data.size()) {
+				data.add(objects.get(i));
+			} else {
+				data.add(newPos++, objects.get(i));
+			}
+		}
 	}
 }

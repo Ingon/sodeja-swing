@@ -59,7 +59,7 @@ public class ValidationController implements ApplicationContextListener {
     }
     
 	public void applicationStartup(ApplicationContext context) {
-        timer = new Timer(300, new ActionListener() {
+        timer = new Timer(150, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				validate(timedValidatables);
 			}
