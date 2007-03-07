@@ -77,6 +77,10 @@ public class GridBag {
         return line(0, gridy, 0.0);
     }
 
+    public static GridBagConstraints lineLabelNorth(int gridy) {
+        return create(0, gridy, 1, 1, 0.0, 0.0, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL);
+    }
+    
     public static GridBagConstraints lineField(int gridy) {
         return line(1, gridy);
     }

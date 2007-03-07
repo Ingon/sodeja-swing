@@ -25,7 +25,7 @@ public class AreaLocalizator<T extends ApplicationContext> extends TextLocalizat
 
 	protected void initComponents() {
 		container.add(ctx.getLocalizationFactory().createLabel(lblResource), 
-				GridBag.lineLabel(gridData.getRow()));
+				GridBag.lineLabelNorth(gridData.getRow()));
 		
 		tcValue = new JTextArea();
 		container.add(new JScrollPane(tcValue), GridBag.create(1, gridData.getRow(), gridData.getColumnsCount() - 2, 1, 1.0, rowWeight));
