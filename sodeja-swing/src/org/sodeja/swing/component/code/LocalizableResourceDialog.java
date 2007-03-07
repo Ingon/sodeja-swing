@@ -14,10 +14,12 @@ import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.GridBag;
 import org.sodeja.swing.component.ApplicationDialog;
 import org.sodeja.swing.component.ApplicationFrame;
+import org.sodeja.swing.component.action.ApplicationAction;
 import org.sodeja.swing.component.form.FormPanelGridData;
 import org.sodeja.swing.component.form.NamedFormDialog;
 import org.sodeja.swing.context.ApplicationContext;
 import org.sodeja.swing.resource.ResourceConstants;
+import org.sodeja.swing.validation.Validatable;
 
 public class LocalizableResourceDialog<T extends ApplicationContext> extends NamedFormDialog<T> {
 
@@ -27,6 +29,9 @@ public class LocalizableResourceDialog<T extends ApplicationContext> extends Nam
 	
 	private JTable tblLocalization;
 	private LocalizableResourceTableModel tblLocalizationModel;
+	
+	private ApplicationAction<T> actionLocalizationAdd;
+	private ApplicationAction<T> actionLocalizationRemove;
 	
 	private LocalizableResource code;
 	
@@ -66,9 +71,12 @@ public class LocalizableResourceDialog<T extends ApplicationContext> extends Nam
 		
 		add(new JScrollPane(tblLocalization), GridBag.bigPanel(gridData.getRow(), 2));
 		
+		actionLocalizationAdd = ButtonBarFactory.addButton(ctx, this);
+		actionLocalizationRemove = ButtonBarFactory.removeButton(ctx, this);
+		ctx.getValidationController().addTimedValidatable(new RemoveValidateable());
+		
 		add(ButtonBarFactory.constructVerticalButtonsPane(
-				ButtonBarFactory.addButton(ctx, this), 
-				ButtonBarFactory.removeButton(ctx, this)),
+				actionLocalizationAdd, actionLocalizationRemove),
 			GridBag.buttonColumn(2, gridData.getRow(), 1));
 		
 		gridData.setColumnsCount(3);
@@ -118,5 +126,18 @@ public class LocalizableResourceDialog<T extends ApplicationContext> extends Nam
 	@Override
 	protected String getResourceName() {
 		return ResourceConstants.DLG_LOCALIZATION;
+	}
+
+	private final class RemoveValidateable implements Validatable {
+		public void validate() {
+			int row = tblLocalization.getSelectedRow();
+			if(row < 0) {
+				actionLocalizationRemove.setEnabled(false);
+				return;
+			}
+			
+			Locale locale = tblLocalizationModel.getLocale(row);
+			actionLocalizationRemove.setEnabled(! locale.equals(ctx.getLocaleProvider().getLocale()));
+		}
 	}
 }
