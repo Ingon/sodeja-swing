@@ -20,6 +20,7 @@ import org.sodeja.swing.context.ApplicationContext;
 public class CheckBoxTableCellRenderer<T extends ApplicationContext> extends JPanel implements TableCellRenderer {
 	private static final long serialVersionUID = -7675705979343419313L;
 	
+	@SuppressWarnings("unused")
 	private T ctx;
 	private Pair<Color, Color> scheme;
 	private JCheckBox chkDelegate;
@@ -49,6 +50,7 @@ public class CheckBoxTableCellRenderer<T extends ApplicationContext> extends JPa
 		this.functor = functor;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
 		RendererUtils.updateView(this, scheme, row);
@@ -58,7 +60,6 @@ public class CheckBoxTableCellRenderer<T extends ApplicationContext> extends JPa
 		}
 
 		chkDelegate.setSelected((Boolean) functor.execute(value));
-		table.setRowHeight(row, chkDelegate.getPreferredSize().height);
 		
 		RendererUtils.setProperBorder(this, isSelected, hasFocus);
 		
