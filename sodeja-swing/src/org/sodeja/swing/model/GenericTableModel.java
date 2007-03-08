@@ -97,6 +97,8 @@ public class GenericTableModel<T> extends AbstractTableModel {
 		}
 		
 		moveBlocks(divideOnBlocks(indexes), -1);
+		
+		fireTableDataChanged();
 	}
 
 	public void moveDown(int[] indexes) {
@@ -105,6 +107,8 @@ public class GenericTableModel<T> extends AbstractTableModel {
 		}
 
 		moveBlocks(divideOnBlocks(indexes), 1);
+
+		fireTableDataChanged();
 	}
 	
 	private List<List<Integer>> divideOnBlocks(int[] indexes) {
