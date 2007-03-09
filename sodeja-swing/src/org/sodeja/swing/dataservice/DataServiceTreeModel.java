@@ -10,6 +10,7 @@ import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
+import org.sodeja.collections.ListUtils;
 import org.sodeja.dataservice.DataService;
 import org.sodeja.dataservice.DataServiceListener;
 
@@ -52,6 +53,14 @@ public class DataServiceTreeModel<T> implements TreeModel, DataServiceListener<T
 		}
 		
 		current.addLeaf(obj);
+	}
+	
+	TreePath findPathFor(T obj) {
+		List<DataTreeNode<T>> resultList = rootNode.getPath(obj);
+		DataTreeNode<T>[] arr = ListUtils.asArray(resultList);
+		
+		TreePath path = new TreePath(arr);
+		return path.pathByAddingChild(obj);
 	}
 	
 	// TreeModelTreeModel
