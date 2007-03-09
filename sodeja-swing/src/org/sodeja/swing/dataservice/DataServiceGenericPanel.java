@@ -2,7 +2,6 @@ package org.sodeja.swing.dataservice;
 
 import java.awt.GridBagLayout;
 import java.util.Comparator;
-import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -12,7 +11,6 @@ import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 
 import org.sodeja.dataservice.DataService;
-import org.sodeja.functional.Predicate1;
 import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.ComponentUtils;
 import org.sodeja.swing.GridBag;
@@ -80,7 +78,8 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 
 	protected abstract FormPanel<T, R> createViewForm();	
 
-	protected abstract Predicate1<R> createPredicate(String term);
+//	protected abstract Predicate1<R> createPredicate(String term);
+	protected abstract R findBestMatch(String term);
 	
 	protected abstract Comparator<R> createComparator();
 	
@@ -94,12 +93,16 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 			return;
 		}
 		
-		List<R> result = dataService.find(createPredicate(term));
-		if(result.isEmpty()) {
-			return;
+		R result = findBestMatch(term);
+		if(result != null) {
+			setSelectedValue(result);
 		}
-		
-		setSelectedValue(result.get(0));
+//		List<R> result = dataService.find(createPredicate(term));
+//		if(result.isEmpty()) {
+//			return;
+//		}
+//		
+//		setSelectedValue(result.get(0));
 	}
 	
 	protected void addCallback() {
