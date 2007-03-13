@@ -45,7 +45,7 @@ public class PicturePanel<T extends ApplicationContext> extends JPanel {
 		contentModel = new PictureListModel();
 		contentList = new JList(contentModel);
 		contentList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		contentList.setLayoutOrientation(JList.VERTICAL_WRAP);
+		contentList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		contentList.setVisibleRowCount(-1);
 		contentList.setCellRenderer(new PictureResourceListCellRenderer());
 		add(new JScrollPane(contentList), GridBag.bigPanel());
