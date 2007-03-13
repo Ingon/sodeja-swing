@@ -15,7 +15,6 @@ import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.ComponentUtils;
 import org.sodeja.swing.GridBag;
 import org.sodeja.swing.component.ApplicationPanel;
-import org.sodeja.swing.component.form.FormPanel;
 import org.sodeja.swing.context.ApplicationContext;
 import org.sodeja.swing.resource.ResourceConstants;
 import org.sodeja.swing.validation.ValidationFailedDialog;
@@ -28,9 +27,9 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 	protected JPanel dataPanel;
 	protected DataService<R> dataService;
 	
-	private FormPanel<T, R> addFormPanel;
-	private FormPanel<T, R> editFormPanel;
-	private FormPanel<T, R> viewFormPanel;
+	private DataServiceFormPanel<T, R> addFormPanel;
+	private DataServiceFormPanel<T, R> editFormPanel;
+	private DataServiceFormPanel<T, R> viewFormPanel;
 	
 	public DataServiceGenericPanel(T ctx, DataService<R> dataService) {
 		super(ctx);
@@ -72,13 +71,12 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 	protected abstract void clearSelection();
 
 	// overriden by real panels
-	protected abstract FormPanel<T, R> createAddForm();	
+	protected abstract DataServiceFormPanel<T, R> createAddForm();	
 
-	protected abstract FormPanel<T, R> createEditForm();	
+	protected abstract DataServiceFormPanel<T, R> createEditForm();	
 
-	protected abstract FormPanel<T, R> createViewForm();	
+	protected abstract DataServiceFormPanel<T, R> createViewForm();	
 
-//	protected abstract Predicate1<R> createPredicate(String term);
 	protected abstract R findBestMatch(String term);
 	
 	protected abstract Comparator<R> createComparator();
@@ -131,6 +129,10 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 	}
 	
 	protected void viewCallback() {
+		if(checkAddEditForms()) {
+			return;
+		}
+		
 		R value = getSelectedValue();
 		if (value == null) {
 			ComponentUtils.clearContainer(dataPanel);
@@ -165,5 +167,30 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		clearSelection();
 		
 		ComponentUtils.clearContainer(dataPanel);
+	}
+
+	private boolean checkAddEditForms() {
+		if(addFormPanel != null && addFormPanel.isFormVisible()) {
+			if(cancelRejected(ResourceConstants.OPT_ADD_FORM_CANCEL)) {
+				return true;
+			}
+			addFormPanel.hideForm();
+		} else if(editFormPanel != null && editFormPanel.isFormVisible()) {
+			if(cancelRejected(ResourceConstants.OPT_EDIT_FORM_CANCEL)) {
+				return true;
+			}
+			editFormPanel.hideForm();
+		}
+		
+		return false;
+	}
+	
+	private boolean cancelRejected(String textResource) {
+		int result = JOptionPane.showConfirmDialog(ctx.getRootFrame(), 
+				ctx.getResourceProvider().getStringValue(textResource), 
+				ctx.getResourceProvider().getStringValue(ResourceConstants.DLG_FORM_CANCEL), 
+				JOptionPane.YES_NO_OPTION);
+		
+		return result != JOptionPane.YES_OPTION;
 	}
 }

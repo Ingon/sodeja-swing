@@ -21,6 +21,8 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 	private int columns;
 	private int rows;
 	
+	private boolean formVisible;
+	
 	public DataServiceFormPanel(T ctx, DataService<R> service, Class<R> dataClazz, 
 			DataServiceFormPanelType type, String resourceId) {
 		super(ctx);
@@ -70,6 +72,7 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 	public void showForm(R object) {
 		this.dataInstance = object;
 		fillForm(object);
+		formVisible = true;
 	}
 
 	@Override
@@ -85,6 +88,16 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 		super.okCallback();
 	}
 
+	@Override
+	protected void hideForm() {
+		formVisible = false;
+		super.hideForm();
+	}
+
+	protected boolean isFormVisible() {
+		return formVisible;
+	}
+	
 	protected abstract void disableComponents();
 	
 	protected abstract void fillForm(R object);

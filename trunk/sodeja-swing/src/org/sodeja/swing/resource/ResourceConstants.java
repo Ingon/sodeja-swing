@@ -39,4 +39,8 @@ public interface ResourceConstants {
 	public static final String DLG_VALIDATION_FAILED = "dlg.validation.failed"; //$NON-NLS-1$
 	public static final String VM_LOCALIZATION_MISSING = "vm.localization.missing"; //$NON-NLS-1$
 	public static final String VM_LOCALIZATION_COLLISION = "vm.localization.collision"; //$NON-NLS-1$
+	
+	public static final String DLG_FORM_CANCEL = "dlg.form.cancel"; //$NON-NLS-1$
+	public static final String OPT_ADD_FORM_CANCEL = "opt.add.form.cancel"; //$NON-NLS-1$
+	public static final String OPT_EDIT_FORM_CANCEL = "opt.edit.form.cancel"; //$NON-NLS-1$
 }
