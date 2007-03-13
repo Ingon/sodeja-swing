@@ -61,8 +61,8 @@ public abstract class DataServiceTreePanel<T extends ApplicationContext, R> exte
 
 	@Override
 	protected void setSelectedValue(R value) {
-		TreePath path = dataModel.findPathFor(value);
-		dataTree.setSelectionPath(path);
+//		TreePath path = dataModel.findPathFor(value);
+//		dataTree.setSelectionPath(path);
 	}
 
 	private class ClickMouseListener extends MouseAdapter {
