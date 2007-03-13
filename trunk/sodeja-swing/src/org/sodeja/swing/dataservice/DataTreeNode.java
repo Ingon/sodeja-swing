@@ -102,6 +102,16 @@ public class DataTreeNode<T> {
 		parentPath.remove(this);
 	}
 	
+	protected void findPath(List<String> path, T data, List<DataTreeNode> parentPath) {
+		parentPath.add(this);
+		if(path.isEmpty()) {
+			return;
+		}
+		
+		DataTreeNode<T> child = findChild(ListUtils.head(path));
+		child.findPath(ListUtils.tail(path), data, parentPath);
+	}
+	
 	private boolean isEmpty() {
 		return children.isEmpty() && leaves.isEmpty();
 	}

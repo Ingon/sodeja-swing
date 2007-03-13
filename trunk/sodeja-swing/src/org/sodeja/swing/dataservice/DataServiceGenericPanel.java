@@ -97,12 +97,6 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		if(result != null) {
 			setSelectedValue(result);
 		}
-//		List<R> result = dataService.find(createPredicate(term));
-//		if(result.isEmpty()) {
-//			return;
-//		}
-//		
-//		setSelectedValue(result.get(0));
 	}
 	
 	protected void addCallback() {
