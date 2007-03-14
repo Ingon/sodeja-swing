@@ -84,8 +84,8 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 			return;
 		}
 		fillObject(dataInstance);
-		type.doSave(service, dataInstance);
 		super.okCallback();
+		type.doSave(service, dataInstance);
 	}
 
 	@Override

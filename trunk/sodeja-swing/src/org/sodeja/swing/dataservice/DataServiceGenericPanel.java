@@ -98,6 +98,10 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 	}
 	
 	protected void addCallback() {
+		if(checkEditForm()) {
+			return;
+		}
+		
 		if(addFormPanel == null) {
 			addFormPanel = createAddForm();
 		}
@@ -111,6 +115,10 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 	}
 	
 	protected void editCallback() {
+		if(checkAddForm()) {
+			return;
+		}
+		
 		R value = getSelectedValue();
 		if (value == null) {
 			ComponentUtils.clearContainer(dataPanel);
@@ -183,12 +191,34 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 	}
 
 	private boolean checkAddEditForms() {
+		return checkAddForm() || checkEditForm();
+//		if(addFormPanel != null && addFormPanel.isFormVisible()) {
+//			if(cancelRejected(ResourceConstants.OPT_ADD_FORM_CANCEL)) {
+//				return true;
+//			}
+//			addFormPanel.hideForm();
+//		} else if(editFormPanel != null && editFormPanel.isFormVisible()) {
+//			if(cancelRejected(ResourceConstants.OPT_EDIT_FORM_CANCEL)) {
+//				return true;
+//			}
+//			editFormPanel.hideForm();
+//		}
+//		
+//		return false;
+	}
+	
+	private boolean checkAddForm() {
 		if(addFormPanel != null && addFormPanel.isFormVisible()) {
 			if(cancelRejected(ResourceConstants.OPT_ADD_FORM_CANCEL)) {
 				return true;
 			}
 			addFormPanel.hideForm();
-		} else if(editFormPanel != null && editFormPanel.isFormVisible()) {
+		}
+		return false;
+	}
+	
+	private boolean checkEditForm() {
+		if(editFormPanel != null && editFormPanel.isFormVisible()) {
 			if(cancelRejected(ResourceConstants.OPT_EDIT_FORM_CANCEL)) {
 				return true;
 			}
