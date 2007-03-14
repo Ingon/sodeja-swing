@@ -43,4 +43,7 @@ public interface ResourceConstants {
 	public static final String DLG_FORM_CANCEL = "dlg.form.cancel"; //$NON-NLS-1$
 	public static final String OPT_ADD_FORM_CANCEL = "opt.add.form.cancel"; //$NON-NLS-1$
 	public static final String OPT_EDIT_FORM_CANCEL = "opt.edit.form.cancel"; //$NON-NLS-1$
+
+	public static final String DLG_DELETE_CONFIRM = "dlg.gelete.confirm"; //$NON-NLS-1$
+	public static final String DLG_DELETE_CONFIRM_CONTENT = "dlg.gelete.confirm.content"; //$NON-NLS-1$
 }

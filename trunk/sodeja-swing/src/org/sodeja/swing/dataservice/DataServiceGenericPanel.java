@@ -156,6 +156,10 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 			return;
 		}
 		
+		if(cancelDelete()) {
+			return;
+		}
+		
 		ValidationResult validationResult = new ValidationResult();
 		validateDelete(value, validationResult);
 		if(! validationResult.isValid()) {
@@ -167,6 +171,15 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		clearSelection();
 		
 		ComponentUtils.clearContainer(dataPanel);
+	}
+
+	private boolean cancelDelete() {
+		int result = JOptionPane.showConfirmDialog(ctx.getRootFrame(), 
+				ctx.getResourceProvider().getStringValue(ResourceConstants.DLG_DELETE_CONFIRM_CONTENT), 
+				ctx.getResourceProvider().getStringValue(ResourceConstants.DLG_DELETE_CONFIRM), 
+				JOptionPane.YES_NO_OPTION);
+		
+		return result != JOptionPane.YES_OPTION;
 	}
 
 	private boolean checkAddEditForms() {
