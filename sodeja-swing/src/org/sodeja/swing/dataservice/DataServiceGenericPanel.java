@@ -27,9 +27,9 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 	protected JPanel dataPanel;
 	protected DataService<R> dataService;
 	
-	private DataServiceFormPanel<T, R> addFormPanel;
-	private DataServiceFormPanel<T, R> editFormPanel;
-	private DataServiceFormPanel<T, R> viewFormPanel;
+	protected DataServiceFormPanel<T, R> addFormPanel;
+	protected DataServiceFormPanel<T, R> editFormPanel;
+	protected DataServiceFormPanel<T, R> viewFormPanel;
 	
 	public DataServiceGenericPanel(T ctx, DataService<R> dataService) {
 		super(ctx);
@@ -180,7 +180,31 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		
 		ComponentUtils.clearContainer(dataPanel);
 	}
+	
+	protected void hideAllForms() {
+		hideAddForm();
+		hideEditForm();
+		hideViewForm();
+	}
 
+	protected void hideAddForm() {
+		if(addFormPanel != null && addFormPanel.isVisible()) {
+			addFormPanel.hideForm();
+		}
+	}
+
+	protected void hideEditForm() {
+		if(editFormPanel != null && editFormPanel.isVisible()) {
+			editFormPanel.hideForm();
+		}
+	}
+
+	protected void hideViewForm() {
+		if(viewFormPanel != null && viewFormPanel.isVisible()) {
+			viewFormPanel.hideForm();
+		}
+	}
+	
 	private boolean cancelDelete() {
 		int result = JOptionPane.showConfirmDialog(ctx.getRootFrame(), 
 				ctx.getResourceProvider().getStringValue(ResourceConstants.DLG_DELETE_CONFIRM_CONTENT), 
@@ -192,19 +216,6 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 
 	private boolean checkAddEditForms() {
 		return checkAddForm() || checkEditForm();
-//		if(addFormPanel != null && addFormPanel.isFormVisible()) {
-//			if(cancelRejected(ResourceConstants.OPT_ADD_FORM_CANCEL)) {
-//				return true;
-//			}
-//			addFormPanel.hideForm();
-//		} else if(editFormPanel != null && editFormPanel.isFormVisible()) {
-//			if(cancelRejected(ResourceConstants.OPT_EDIT_FORM_CANCEL)) {
-//				return true;
-//			}
-//			editFormPanel.hideForm();
-//		}
-//		
-//		return false;
 	}
 	
 	private boolean checkAddForm() {
