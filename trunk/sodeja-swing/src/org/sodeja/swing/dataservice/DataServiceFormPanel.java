@@ -64,8 +64,7 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 
 	@Override
 	public void showForm() {
-		dataInstance = ReflectUtils.newInstance(dataClazz);
-		this.showForm(dataInstance);
+		this.showForm(createObject());
 	}
 
 	@Override
@@ -74,7 +73,7 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 		fillForm(object);
 		formVisible = true;
 	}
-
+	
 	@Override
 	protected void okCallback() {
 		ValidationResult validationResult = new ValidationResult();
@@ -130,5 +129,9 @@ public abstract class DataServiceFormPanel<T extends ApplicationContext, R> exte
 		}
 		
 		protected abstract void doSave(DataService service, Object obj);
+	}
+	
+	private R createObject() {
+		return ReflectUtils.newInstance(dataClazz);
 	}
 }

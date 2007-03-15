@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.JToolBar;
 
 import org.sodeja.swing.component.action.ApplicationAction;
 import org.sodeja.swing.component.action.CallLocalMethodAction;
@@ -94,5 +95,17 @@ public final class ButtonBarFactory {
     		return new JToggleButton(action);
     	}
     	return new JButton(action);
+    }
+    
+    public static JToolBar createToolbar(ApplicationAction... actions) {
+    	JToolBar toolBar = new JToolBar();
+    	fillToolbar(toolBar, actions);
+    	return toolBar;
+    }
+
+    public static void fillToolbar(JToolBar toolBar, ApplicationAction... actions) {
+    	for(ApplicationAction action : actions) {
+    		toolBar.add(action);
+    	}
     }
 }
