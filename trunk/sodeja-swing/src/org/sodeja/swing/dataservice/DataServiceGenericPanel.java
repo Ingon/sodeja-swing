@@ -164,6 +164,10 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 			return;
 		}
 		
+		if(checkAddEditForms()) {
+			return;
+		}
+		
 		if(cancelDelete()) {
 			return;
 		}
