@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
-import javax.swing.SwingUtilities;
+import javax.swing.JToolBar;
 
 import org.sodeja.dataservice.DataService;
 import org.sodeja.swing.ButtonBarFactory;
@@ -24,6 +24,7 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 
 	private static final long serialVersionUID = -7703771094766278196L;
 
+	protected JToolBar toolbar;
 	protected JPanel dataPanel;
 	protected DataService<R> dataService;
 	
@@ -41,10 +42,17 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 	protected final void initComponents() {
 		this.setLayout(new GridBagLayout());
 		
-		this.add(ButtonBarFactory.constructHorizontalButtonsPane(
-				ButtonBarFactory.searchButton(ctx, this), ButtonBarFactory.addButton(ctx, this), 
-				ButtonBarFactory.editButton(ctx, this), ButtonBarFactory.deleteButton(ctx, this)),
-			GridBag.leftButtonLine(0));
+		toolbar = ButtonBarFactory.createToolbar(
+						ButtonBarFactory.searchButton(ctx, this), ButtonBarFactory.addButton(ctx, this), 
+						ButtonBarFactory.editButton(ctx, this), ButtonBarFactory.deleteButton(ctx, this));
+		toolbar.setFloatable(false);
+//		toolbar.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+
+		this.add(toolbar, GridBag.leftButtonLine(0));
+
+//		this.add(ButtonBarFactory.constructHorizontalButtonsPane(ButtonBarFactory.searchButton(ctx, this),
+//				ButtonBarFactory.addButton(ctx, this), ButtonBarFactory.editButton(ctx, this), ButtonBarFactory
+//						.deleteButton(ctx, this)), GridBag.leftButtonLine(0));
 		
 		JSplitPane contentPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		contentPanel.setDividerSize(3);
@@ -107,11 +115,7 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		}
 		
 		addFormPanel.showForm();
-		
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				ComponentUtils.swapInContainer(dataPanel, addFormPanel, GridBag.bigPanel());
-			}});
+		ComponentUtils.swapInContainerBigLater(dataPanel, addFormPanel);
 	}
 	
 	protected void editCallback() {
@@ -130,10 +134,7 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		}
 		
 		editFormPanel.showForm(value);
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				ComponentUtils.swapInContainer(dataPanel, editFormPanel, GridBag.bigPanel());
-			}});
+		ComponentUtils.swapInContainerBigLater(dataPanel, editFormPanel);
 	}
 	
 	protected void viewCallback() {
@@ -152,10 +153,7 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		}
 		
 		viewFormPanel.showForm(value);
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				ComponentUtils.swapInContainer(dataPanel, viewFormPanel, GridBag.bigPanel());
-			}});
+		ComponentUtils.swapInContainerBigLater(dataPanel, viewFormPanel);
 	}
 	
 	protected void deleteCallback() {
@@ -209,20 +207,11 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		}
 	}
 	
-	private boolean cancelDelete() {
-		int result = JOptionPane.showConfirmDialog(ctx.getRootFrame(), 
-				ctx.getResourceProvider().getStringValue(ResourceConstants.DLG_DELETE_CONFIRM_CONTENT), 
-				ctx.getResourceProvider().getStringValue(ResourceConstants.DLG_DELETE_CONFIRM), 
-				JOptionPane.YES_NO_OPTION);
-		
-		return result != JOptionPane.YES_OPTION;
-	}
-
-	private boolean checkAddEditForms() {
+	protected boolean checkAddEditForms() {
 		return checkAddForm() || checkEditForm();
 	}
 	
-	private boolean checkAddForm() {
+	protected boolean checkAddForm() {
 		if(addFormPanel != null && addFormPanel.isFormVisible()) {
 			if(cancelRejected(ResourceConstants.OPT_ADD_FORM_CANCEL)) {
 				return true;
@@ -232,7 +221,7 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		return false;
 	}
 	
-	private boolean checkEditForm() {
+	protected boolean checkEditForm() {
 		if(editFormPanel != null && editFormPanel.isFormVisible()) {
 			if(cancelRejected(ResourceConstants.OPT_EDIT_FORM_CANCEL)) {
 				return true;
@@ -243,6 +232,15 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		return false;
 	}
 	
+	private boolean cancelDelete() {
+		int result = JOptionPane.showConfirmDialog(ctx.getRootFrame(), 
+				ctx.getResourceProvider().getStringValue(ResourceConstants.DLG_DELETE_CONFIRM_CONTENT), 
+				ctx.getResourceProvider().getStringValue(ResourceConstants.DLG_DELETE_CONFIRM), 
+				JOptionPane.YES_NO_OPTION);
+		
+		return result != JOptionPane.YES_OPTION;
+	}
+
 	private boolean cancelRejected(String textResource) {
 		int result = JOptionPane.showConfirmDialog(ctx.getRootFrame(), 
 				ctx.getResourceProvider().getStringValue(textResource), 

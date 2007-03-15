@@ -2,12 +2,24 @@ package org.sodeja.swing;
 
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
 
 public final class ComponentUtils {
 	public static void swapInContainer(JComponent container, JComponent component) {
 		swapInContainer(container, component, null);
 	}
 
+	public static void swapInContainerBig(JComponent container, JComponent component) {
+		swapInContainer(container, component, GridBag.bigPanel());
+	}
+	
+	public static void swapInContainerBigLater(final JComponent container, final JComponent component) {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				swapInContainerBig(container, component);
+			}});
+	}
+	
 	public static void swapInContainer(JComponent container,
 			JComponent component, Object layout) {
 		container.removeAll();
