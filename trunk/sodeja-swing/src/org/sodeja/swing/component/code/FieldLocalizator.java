@@ -26,7 +26,6 @@ public class FieldLocalizator<T extends ApplicationContext> extends TextLocaliza
 		tcValue = new JTextField();
 		container.add(tcValue, GridBag.lineField(gridData.getRow(), gridData.getColumnsCount() - 2));
 		
-//		actionValue = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_DICTIONARY, this, "dictionaryCallback"); //$NON-NLS-1$
 		actionValue = ButtonBarFactory.dictionaryButton(ctx, this);
 		container.add(new JButton(actionValue), GridBag.create(gridData.getColumnsCount() - 1, gridData.getRow(), 1, 1, 0.0, 0.0,
 				GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL));
