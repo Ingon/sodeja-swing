@@ -62,14 +62,6 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		
 		toolbar = ButtonBarFactory.createToolbar(searchButton, addButton, editButton, deleteButton);
 		toolbar.setFloatable(false);
-
-//		this.add(toolbar, GridBag.leftButtonLine(0));
-
-//		this.add(ButtonBarFactory.constructHorizontalButtonsPane(ButtonBarFactory.searchButton(ctx, this),
-//				ButtonBarFactory.addButton(ctx, this), ButtonBarFactory.editButton(ctx, this), ButtonBarFactory
-//						.deleteButton(ctx, this)), GridBag.leftButtonLine(0));
-		
-//		this.add(new JSeparator(), GridBag.separatorLine(1, 1));
 		
 		JSplitPane contentPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		contentPanel.setDividerSize(3);
@@ -81,7 +73,6 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		JScrollPane scrollExercisesList = new JScrollPane(initObjectsComponent());
 		pnlLeft.add(scrollExercisesList, BorderLayout.CENTER);
 		
-//		contentPanel.setLeftComponent(scrollExercisesList);
 		contentPanel.setLeftComponent(pnlLeft);
 
 		dataPanel = new JPanel();
@@ -140,6 +131,7 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		
 		addFormPanel.showForm();
 		ComponentUtils.swapInContainerBigLater(dataPanel, addFormPanel);
+		addFormPanel.grabFocus();
 	}
 	
 	protected void editCallback() {
@@ -159,6 +151,7 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		
 		editFormPanel.showForm(value);
 		ComponentUtils.swapInContainerBigLater(dataPanel, editFormPanel);
+		editFormPanel.grabFocus();
 	}
 	
 	protected void viewCallback() {
