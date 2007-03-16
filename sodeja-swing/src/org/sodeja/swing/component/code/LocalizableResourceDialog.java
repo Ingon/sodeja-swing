@@ -25,8 +25,6 @@ public class LocalizableResourceDialog<T extends ApplicationContext> extends Nam
 
 	private static final long serialVersionUID = -2318681092752453854L;
 
-	private JTextField tfCodeId;
-	
 	private JTable tblLocalization;
 	private LocalizableResourceTableModel tblLocalizationModel;
 	
@@ -49,15 +47,6 @@ public class LocalizableResourceDialog<T extends ApplicationContext> extends Nam
 
 	@Override
 	protected void initComponentsDelegate(FormPanelGridData gridData) {
-		add(ctx.getLocalizationFactory().createLabel(ResourceConstants.LBL_ID), 
-				GridBag.lineLabel(gridData.getRow()));
-		
-		tfCodeId = new JTextField();
-		tfCodeId.setEditable(false);
-		add(tfCodeId, GridBag.lineField(gridData.getRow(), 1));
-		
-		gridData.nextRow();
-		
 		tblLocalizationModel = new LocalizableResourceTableModel();
 		tblLocalization = new JTable(tblLocalizationModel);
 		tblLocalization.getColumnModel().getColumn(0).setHeaderValue(
@@ -93,7 +82,6 @@ public class LocalizableResourceDialog<T extends ApplicationContext> extends Nam
 	public void showLocalization(LocalizableResource code) {
 		this.code = code;
 		
-		tfCodeId.setText(code.getId());
 		tblLocalizationModel.copyFrom(code);
 		
 		setVisible(true);
