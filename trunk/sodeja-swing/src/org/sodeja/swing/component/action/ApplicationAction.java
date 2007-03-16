@@ -34,7 +34,7 @@ public abstract class ApplicationAction<T extends ApplicationContext> extends
 		putValue(Action.NAME, name);
 	}
 
-	protected void setTooltip(String tip) {
+	public void setTooltip(String tip) {
 		putValue(Action.SHORT_DESCRIPTION, tip);
 	}
 

@@ -46,15 +46,19 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 		
 		ApplicationAction<T> searchButton = ButtonBarFactory.searchButton(ctx, this);
 		searchButton.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_MASTER_SEARCH));
+		searchButton.setTooltip(ctx.getResourceProvider().getStringValue(ResourceConstants.BTN_SEARCH));
 		
 		ApplicationAction<T> addButton = ButtonBarFactory.addButton(ctx, this);
 		addButton.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_MASTER_ADD));
+		addButton.setTooltip(ctx.getResourceProvider().getStringValue(ResourceConstants.BTN_ADD));
 		
 		ApplicationAction<T> editButton = ButtonBarFactory.editButton(ctx, this);
 		editButton.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_MASTER_EDIT));
+		editButton.setTooltip(ctx.getResourceProvider().getStringValue(ResourceConstants.BTN_EDIT));
 		
 		ApplicationAction<T> deleteButton = ButtonBarFactory.deleteButton(ctx, this);
 		deleteButton.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_MASTER_DELETE));
+		deleteButton.setTooltip(ctx.getResourceProvider().getStringValue(ResourceConstants.BTN_DELETE));
 		
 		toolbar = ButtonBarFactory.createToolbar(searchButton, addButton, editButton, deleteButton);
 		toolbar.setFloatable(false);
