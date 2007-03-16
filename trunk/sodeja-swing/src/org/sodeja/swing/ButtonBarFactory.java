@@ -50,15 +50,21 @@ public final class ButtonBarFactory {
     }
     
     public static <T extends ApplicationContext> ApplicationAction closeToCancelButton(T ctx, Object instance) {
-    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_CLOSE, instance, "cancelCallback"); //$NON-NLS-1$
+    	CallLocalMethodAction<T> result = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_CLOSE, instance, "cancelCallback");//$NON-NLS-1$
+    	result.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_CLOSE));
+		return result; 
     }
     
     public static <T extends ApplicationContext> ApplicationAction<T> okButton(T ctx, Object instance) {
-    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_OK, instance, "okCallback"); //$NON-NLS-1$
+    	CallLocalMethodAction<T> result = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_OK, instance, "okCallback");//$NON-NLS-1$
+    	result.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_OK));
+		return result; 
     }
 
     public static <T extends ApplicationContext> ApplicationAction<T> cancelButton(T ctx, Object instance) {
-    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_CANCEL, instance, "cancelCallback"); //$NON-NLS-1$
+    	CallLocalMethodAction<T> result = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_CANCEL, instance, "cancelCallback"); //$NON-NLS-1$
+    	result.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_CANCEL));
+		return result;
     }
     
     public static <T extends ApplicationContext> ApplicationAction<T> searchButton(T ctx, Object instance) {
@@ -66,21 +72,67 @@ public final class ButtonBarFactory {
     }
 
     public static <T extends ApplicationContext> ApplicationAction<T> addButton(T ctx, Object instance) {
-    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_ADD, instance, "addCallback"); //$NON-NLS-1$
+    	return addButton(ctx, instance, "addCallback"); //$NON-NLS-1$
+    }
+    
+    public static <T extends ApplicationContext> ApplicationAction<T> addButton(T ctx, Object instance, String callback) {
+    	CallLocalMethodAction<T> result = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_ADD, instance, callback);
+    	result.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_ADD));
+		return result;
     }
     
     public static <T extends ApplicationContext> ApplicationAction<T> editButton(T ctx, Object instance) {
-    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_EDIT, instance, "editCallback"); //$NON-NLS-1$
+    	return editButton(ctx, instance, "editCallback"); //$NON-NLS-1$
+    }
+    
+    public static <T extends ApplicationContext> ApplicationAction<T> editButton(T ctx, Object instance, String callback) {
+    	CallLocalMethodAction<T> result = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_EDIT, instance, callback);
+    	result.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_EDIT));
+		return result;
     }
     
     public static <T extends ApplicationContext> ApplicationAction<T> removeButton(T ctx, Object instance) {
-    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_REMOVE, instance, "removeCallback"); //$NON-NLS-1$
+    	return removeButton(ctx, instance, "removeCallback");//$NON-NLS-1$
+    }
+    
+    public static <T extends ApplicationContext> ApplicationAction<T> removeButton(T ctx, Object instance, String callback) {
+    	CallLocalMethodAction<T> result = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_REMOVE, instance, callback);
+    	result.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_REMOVE));
+		return result; 
     }
 
     public static <T extends ApplicationContext> ApplicationAction<T> deleteButton(T ctx, Object instance) {
-    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_DELETE, instance, "deleteCallback"); //$NON-NLS-1$
+    	CallLocalMethodAction<T> result = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_DELETE, instance, "deleteCallback"); //$NON-NLS-1$
+    	result.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_DELETE));
+		return result;
+    }
+
+    public static <T extends ApplicationContext> ApplicationAction<T> upButton(T ctx, Object instance) {
+    	return upButton(ctx, instance, "upCallback"); //$NON-NLS-1$
     }
     
+    public static <T extends ApplicationContext> ApplicationAction<T> upButton(T ctx, Object instance, String callback) {
+    	CallLocalMethodAction<T> result = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_UP, instance, callback);
+    	result.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_UP));
+		return result;
+    }
+
+    public static <T extends ApplicationContext> ApplicationAction<T> downButton(T ctx, Object instance) {
+    	return downButton(ctx, instance, "downCallback"); //$NON-NLS-1$
+    }
+    
+    public static <T extends ApplicationContext> ApplicationAction<T> downButton(T ctx, Object instance, String callback) {
+    	CallLocalMethodAction<T> result = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_DOWN, instance, callback);
+    	result.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_DOWN));
+		return result;
+    }
+    
+    public static <T extends ApplicationContext> ApplicationAction<T> dictionaryButton(T ctx, Object instance) {
+    	CallLocalMethodAction<T> result = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_DICTIONARY, instance, "dictionaryCallback"); //$NON-NLS-1$
+    	result.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_DICTIONARY));
+		return result;
+    }
+
     private static JPanel constructButtonsPane(int rows, int cols, ApplicationAction... actions) {
         JPanel pnlButtons = new JPanel(new GridLayout(rows, cols, 4, 4));
         for(ApplicationAction action : actions) {

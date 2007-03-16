@@ -1,5 +1,6 @@
 package org.sodeja.swing.dataservice;
 
+import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.util.Comparator;
 
@@ -15,6 +16,7 @@ import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.ComponentUtils;
 import org.sodeja.swing.GridBag;
 import org.sodeja.swing.component.ApplicationPanel;
+import org.sodeja.swing.component.action.ApplicationAction;
 import org.sodeja.swing.context.ApplicationContext;
 import org.sodeja.swing.resource.ResourceConstants;
 import org.sodeja.swing.validation.ValidationFailedDialog;
@@ -42,23 +44,41 @@ public abstract class DataServiceGenericPanel<T extends ApplicationContext, R> e
 	protected final void initComponents() {
 		this.setLayout(new GridBagLayout());
 		
-		toolbar = ButtonBarFactory.createToolbar(
-						ButtonBarFactory.searchButton(ctx, this), ButtonBarFactory.addButton(ctx, this), 
-						ButtonBarFactory.editButton(ctx, this), ButtonBarFactory.deleteButton(ctx, this));
+		ApplicationAction<T> searchButton = ButtonBarFactory.searchButton(ctx, this);
+		searchButton.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_MASTER_SEARCH));
+		
+		ApplicationAction<T> addButton = ButtonBarFactory.addButton(ctx, this);
+		addButton.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_MASTER_ADD));
+		
+		ApplicationAction<T> editButton = ButtonBarFactory.editButton(ctx, this);
+		editButton.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_MASTER_EDIT));
+		
+		ApplicationAction<T> deleteButton = ButtonBarFactory.deleteButton(ctx, this);
+		deleteButton.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_MASTER_DELETE));
+		
+		toolbar = ButtonBarFactory.createToolbar(searchButton, addButton, editButton, deleteButton);
 		toolbar.setFloatable(false);
-//		toolbar.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 
-		this.add(toolbar, GridBag.leftButtonLine(0));
+//		this.add(toolbar, GridBag.leftButtonLine(0));
 
 //		this.add(ButtonBarFactory.constructHorizontalButtonsPane(ButtonBarFactory.searchButton(ctx, this),
 //				ButtonBarFactory.addButton(ctx, this), ButtonBarFactory.editButton(ctx, this), ButtonBarFactory
 //						.deleteButton(ctx, this)), GridBag.leftButtonLine(0));
 		
+//		this.add(new JSeparator(), GridBag.separatorLine(1, 1));
+		
 		JSplitPane contentPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		contentPanel.setDividerSize(3);
 
+		JPanel pnlLeft = new JPanel();
+		pnlLeft.setLayout(new BorderLayout());
+		pnlLeft.add(toolbar, BorderLayout.NORTH);
+		
 		JScrollPane scrollExercisesList = new JScrollPane(initObjectsComponent());
-		contentPanel.setLeftComponent(scrollExercisesList);
+		pnlLeft.add(scrollExercisesList, BorderLayout.CENTER);
+		
+//		contentPanel.setLeftComponent(scrollExercisesList);
+		contentPanel.setLeftComponent(pnlLeft);
 
 		dataPanel = new JPanel();
 		dataPanel.setLayout(new GridBagLayout());

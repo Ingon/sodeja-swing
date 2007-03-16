@@ -26,7 +26,7 @@ public abstract class ApplicationAction<T extends ApplicationContext> extends
 		return ctx;
 	}
 	
-	protected void setIcon(Icon icon) {
+	public void setIcon(Icon icon) {
 		putValue(Action.SMALL_ICON, icon);
 	}
 
