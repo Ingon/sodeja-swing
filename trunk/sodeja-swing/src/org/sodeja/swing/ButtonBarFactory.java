@@ -42,7 +42,9 @@ public final class ButtonBarFactory {
     }
 
     public static <T extends ApplicationContext> ApplicationAction<T> closeButton(T ctx, Object instance) {
-    	return new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_CLOSE, instance, "closeCallback"); //$NON-NLS-1$
+    	CallLocalMethodAction<T> result = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_CLOSE, instance, "closeCallback"); //$NON-NLS-1$
+    	result.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_CLOSE));
+		return result;
     }
     
     public static <T extends ApplicationContext> ApplicationAction[] closeToCancelButtons(T ctx, Object instance) {
