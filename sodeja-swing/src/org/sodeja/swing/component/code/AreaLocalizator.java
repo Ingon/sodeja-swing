@@ -8,11 +8,10 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import org.sodeja.swing.ButtonBarFactory;
 import org.sodeja.swing.GridBag;
-import org.sodeja.swing.component.action.CallLocalMethodAction;
 import org.sodeja.swing.component.form.FormPanelGridData;
 import org.sodeja.swing.context.ApplicationContext;
-import org.sodeja.swing.resource.ResourceConstants;
 
 public class AreaLocalizator<T extends ApplicationContext> extends TextLocalizator<T> {
 	private double rowWeight;
@@ -32,7 +31,8 @@ public class AreaLocalizator<T extends ApplicationContext> extends TextLocalizat
 		tcValue.setPreferredSize(new Dimension(200, 200));
 		container.add(new JScrollPane(tcValue), GridBag.create(1, gridData.getRow(), gridData.getColumnsCount() - 2, 1, 1.0, rowWeight));
 		
-		actionValue = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_DICTIONARY, this, "dictionaryCallback"); //$NON-NLS-1$
+//		actionValue = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_DICTIONARY, this, "dictionaryCallback"); //$NON-NLS-1$
+		actionValue = ButtonBarFactory.dictionaryButton(ctx, this);
 		container.add(new JButton(actionValue), GridBag.create(gridData.getColumnsCount() - 1, gridData.getRow(), 1, 1, 0.0, 0.0,
 				GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL));
 	}

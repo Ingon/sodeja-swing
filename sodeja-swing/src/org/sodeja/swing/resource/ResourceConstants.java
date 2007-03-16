@@ -46,4 +46,23 @@ public interface ResourceConstants {
 
 	public static final String DLG_DELETE_CONFIRM = "dlg.gelete.confirm"; //$NON-NLS-1$
 	public static final String DLG_DELETE_CONFIRM_CONTENT = "dlg.gelete.confirm.content"; //$NON-NLS-1$
+	
+	public static final String ICON_MASTER_SEARCH = "icon.master.search"; //$NON-NLS-1$
+	public static final String ICON_MASTER_ADD = "icon.master.add"; //$NON-NLS-1$
+	public static final String ICON_MASTER_EDIT = "icon.master.edit"; //$NON-NLS-1$
+	public static final String ICON_MASTER_DELETE = "icon.master.delete"; //$NON-NLS-1$
+	
+	public static final String ICON_OK = "icon.ok"; //$NON-NLS-1$
+	public static final String ICON_CANCEL = "icon.cancel"; //$NON-NLS-1$
+	public static final String ICON_CLOSE = "icon.close"; //$NON-NLS-1$
+
+	public static final String ICON_ADD = "icon.add"; //$NON-NLS-1$
+	public static final String ICON_EDIT = "icon.edit"; //$NON-NLS-1$
+	public static final String ICON_REMOVE = "icon.remove"; //$NON-NLS-1$
+	public static final String ICON_DELETE = "icon.remove"; //$NON-NLS-1$
+
+	public static final String ICON_UP = "icon.up"; //$NON-NLS-1$
+	public static final String ICON_DOWN = "icon.down"; //$NON-NLS-1$
+
+	public static final String ICON_DICTIONARY = "icon.dictionary"; //$NON-NLS-1$
 }

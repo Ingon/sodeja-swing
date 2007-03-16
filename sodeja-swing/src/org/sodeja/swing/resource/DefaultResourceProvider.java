@@ -49,7 +49,7 @@ public class DefaultResourceProvider implements ResourceProvider, ApplicationCon
     }
 
 	private ImageIcon getImageIcon(String key) {
-		return new ImageIcon(this.getClass().getResource(imagesBase + getStringValue(key)));
+		return new ImageIcon(imagesBase + getStringValue(key));
 	}
 
 	public void applicationStartup(ApplicationContext context) {
