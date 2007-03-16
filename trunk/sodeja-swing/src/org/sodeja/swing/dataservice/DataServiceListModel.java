@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.AbstractListModel;
 
+import org.sodeja.collections.ListUtils;
 import org.sodeja.dataservice.DataService;
 import org.sodeja.dataservice.DataServiceListener;
 
@@ -43,24 +44,18 @@ public class DataServiceListModel<T> extends AbstractListModel implements DataSe
 
 	// DataServiceListener
 	public void created(DataService<T> service, T data) {
-		update();
+		int index = ListUtils.insertSorted(internalData, data, comparator);
+		fireIntervalAdded(this, index, index + 1);
 	}
 
 	public void deleted(DataService<T> service, T data) {
-		update();
+		int index = internalData.indexOf(data);
+		internalData.remove(index);
+		fireIntervalRemoved(this, index, index + 1);
 	}
 
 	public void updated(DataService<T> service, T data) {
-		update();
-	}
-
-	private void update() {
-		int size = internalData.size();
-		
-		internalData.clear();
-		internalData.addAll(dataService.findAll());
-		
-		Collections.sort(internalData, comparator);
-		fireContentsChanged(this, 0, size);
+		deleted(service, data);
+		created(service, data);
 	}
 }
