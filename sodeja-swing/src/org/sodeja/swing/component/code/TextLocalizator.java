@@ -1,12 +1,9 @@
 package org.sodeja.swing.component.code;
 
 import java.awt.Container;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import javax.swing.text.JTextComponent;
 
@@ -97,6 +94,11 @@ abstract class TextLocalizator<T extends ApplicationContext> {
 		
 		public PrivateLocalizableResource(LocalizableResource other) {
 			this.other = other;
+			this.id = other.getId();
+			
+			for(Locale locale : other.getAvailableLocales()) {
+				this.i18nMap.put(locale, other.getLocalizedValue(locale));
+			}
 		}
 
 		@Override
@@ -104,23 +106,11 @@ abstract class TextLocalizator<T extends ApplicationContext> {
 			return other.getId();
 		}
 
-		@Override
-		public String getLocalizedValue(Locale locale) {
-			String value = super.getLocalizedValue(locale);
-			if(value != null) {
-				return value;
-			}
-			return other.getLocalizedValue(locale);
-		}
-		
-		@Override
-		public Collection<Locale> getAvailableLocales() {
-			Set<Locale> allLocales = new HashSet<Locale>(other.getAvailableLocales());
-			allLocales.addAll(super.getAvailableLocales());
-			return allLocales;
-		}
-
 		private void comitData() {
+			for(Locale locale : other.getAvailableLocales()) {
+				other.setLocalizedValue(locale, null);
+			}
+			
 			for(Map.Entry<Locale, String> entry : i18nMap.entrySet()) {
 				other.setLocalizedValue(entry.getKey(), entry.getValue());
 			}
