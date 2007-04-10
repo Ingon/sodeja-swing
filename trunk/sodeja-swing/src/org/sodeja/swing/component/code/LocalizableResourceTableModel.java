@@ -84,6 +84,10 @@ class LocalizableResourceTableModel extends AbstractTableModel {
 	}
 	
 	public void copyTo(LocalizableResource code) {
+		for(Locale locale : code.getAvailableLocales()) {
+			code.setLocalizedValue(locale, null);
+		}
+		
 		for(Map.Entry<Locale, String> entry : i18n.entrySet()) {
 			code.setLocalizedValue(entry.getKey(), entry.getValue());
 		}
