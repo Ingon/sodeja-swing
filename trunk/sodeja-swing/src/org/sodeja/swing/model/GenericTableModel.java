@@ -70,6 +70,10 @@ public class GenericTableModel<T> extends AbstractTableModel {
 		return data.get(index);
 	}
 	
+	public int getIndex(T obj) {
+		return data.indexOf(obj);
+	}
+	
 	public void removeObject(int index) {
 		data.remove(index);
 		fireTableDataChanged();
