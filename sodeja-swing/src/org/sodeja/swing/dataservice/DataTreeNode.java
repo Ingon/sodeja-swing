@@ -125,7 +125,7 @@ public class DataTreeNode<T> {
 	
 	private int addChild(DataTreeNode<T> child) {
 		return ListUtils.insertSorted(children, child, new Comparator<DataTreeNode<T>>() {
-			public int compare(DataTreeNode o1, DataTreeNode<T> o2) {
+			public int compare(DataTreeNode<T> o1, DataTreeNode<T> o2) {
 				return o1.data.compareTo(o2.data);
 			}});
 	}
