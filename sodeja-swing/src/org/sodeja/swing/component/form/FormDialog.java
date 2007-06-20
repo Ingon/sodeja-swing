@@ -20,12 +20,12 @@ public abstract class FormDialog<T extends ApplicationContext> extends Applicati
 		super(ctxCons);
 	}
 
-	public FormDialog(T ctxCons, ApplicationFrame parent) throws HeadlessException {
-		super(ctxCons, parent);
+	public FormDialog(ApplicationFrame<T> parent) throws HeadlessException {
+		super(parent);
 	}
 
-	public FormDialog(T ctxCons, ApplicationDialog parent) throws HeadlessException {
-		super(ctxCons, parent);
+	public FormDialog(ApplicationDialog<T> parent) throws HeadlessException {
+		super(parent);
 	}
 
 	@Override

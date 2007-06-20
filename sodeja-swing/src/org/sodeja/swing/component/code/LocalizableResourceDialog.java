@@ -37,12 +37,12 @@ public class LocalizableResourceDialog<T extends ApplicationContext> extends Nam
 		super(ctxCons);
 	}
 
-	public LocalizableResourceDialog(T ctxCons, ApplicationFrame parent) throws HeadlessException {
-		super(ctxCons, parent);
+	public LocalizableResourceDialog(ApplicationFrame<T> parent) throws HeadlessException {
+		super(parent);
 	}
 
-	public LocalizableResourceDialog(T ctxCons, ApplicationDialog parent) throws HeadlessException {
-		super(ctxCons, parent);
+	public LocalizableResourceDialog(ApplicationDialog<T> parent) throws HeadlessException {
+		super(parent);
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public class LocalizableResourceDialog<T extends ApplicationContext> extends Nam
 	}
 	
 	protected void addCallback() {
-		AddLocalizationDialog<T> dialog = new AddLocalizationDialog<T>(ctx, this);
+		AddLocalizationDialog<T> dialog = new AddLocalizationDialog<T>(this);
 		Pair<Locale, String> result = dialog.showAddLocalization();
 		if(result != null) {
 			tblLocalizationModel.addLocale(result.first, result.second);
