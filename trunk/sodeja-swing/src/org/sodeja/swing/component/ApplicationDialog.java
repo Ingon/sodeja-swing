@@ -24,14 +24,14 @@ public abstract class ApplicationDialog<T extends ApplicationContext> extends JD
 		initInternal(ctxCons);
 	}
 
-	public ApplicationDialog(T ctxCons, ApplicationDialog parent) throws HeadlessException {
+	public ApplicationDialog(ApplicationDialog<T> parent) throws HeadlessException {
 		super(parent);
-		initInternal(ctxCons);
+		initInternal(parent.getContext());
 	}
 
-	public ApplicationDialog(T ctxCons, ApplicationFrame parent) throws HeadlessException {
+	public ApplicationDialog(ApplicationFrame<T> parent) throws HeadlessException {
 		super(parent);
-		initInternal(ctxCons);
+		initInternal(parent.getContext());
 	}
 	
 	public T getContext() {

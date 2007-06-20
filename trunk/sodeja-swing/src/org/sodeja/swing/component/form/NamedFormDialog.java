@@ -7,12 +7,12 @@ import org.sodeja.swing.component.ApplicationFrame;
 import org.sodeja.swing.context.ApplicationContext;
 
 public abstract class NamedFormDialog<T extends ApplicationContext> extends FormDialog<T> {
-	public NamedFormDialog(T ctxCons, ApplicationDialog parent) throws HeadlessException {
-		super(ctxCons, parent);
+	public NamedFormDialog(ApplicationDialog<T> parent) throws HeadlessException {
+		super(parent);
 	}
 
-	public NamedFormDialog(T ctxCons, ApplicationFrame parent) throws HeadlessException {
-		super(ctxCons, parent);
+	public NamedFormDialog(ApplicationFrame<T> parent) throws HeadlessException {
+		super(parent);
 	}
 
 	public NamedFormDialog(T ctxCons) throws HeadlessException {

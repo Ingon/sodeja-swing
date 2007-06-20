@@ -26,8 +26,8 @@ class AddLocalizationDialog<T extends ApplicationContext> extends NamedFormDialo
 	
 	private Pair<Locale, String> result;
 	
-	public AddLocalizationDialog(T ctxCons, ApplicationDialog parent) throws HeadlessException {
-		super(ctxCons, parent);
+	public AddLocalizationDialog(ApplicationDialog<T> parent) throws HeadlessException {
+		super(parent);
 	}
 
 	@Override
