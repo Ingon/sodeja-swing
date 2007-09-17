@@ -2,7 +2,10 @@ package org.sodeja.swing;
 
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+
+import org.sodeja.swing.context.ApplicationContext;
 
 public final class ComponentUtils {
 	public static void swapInContainer(JComponent container, JComponent component) {
@@ -59,5 +62,13 @@ public final class ComponentUtils {
 		for(Object obj : enumClass.getEnumConstants()) {
 			combo.addItem(obj);
 		}
+	}
+	
+	public static void setHeaderValue(ApplicationContext ctx, JTable tbl, int column, Enum key) {
+		setHeaderValue(ctx, tbl, column, key.name());
+	}
+	
+	public static void setHeaderValue(ApplicationContext ctx, JTable tbl, int column, String key) {
+		tbl.getColumnModel().getColumn(column).setHeaderValue(ctx.getResourceProvider().getStringValue(key));
 	}
 }

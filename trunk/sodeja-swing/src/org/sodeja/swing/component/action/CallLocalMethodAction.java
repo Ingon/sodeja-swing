@@ -12,6 +12,10 @@ public class CallLocalMethodAction<T extends ApplicationContext> extends Localiz
 	private Object targetInstance;
 	private String targetMethodName;
 	
+	public CallLocalMethodAction(T ctx, Enum i18nKey, Object targetInstance, String targetMethodName) {
+		this(ctx, i18nKey.name(), targetInstance, targetMethodName);
+	}
+	
 	public CallLocalMethodAction(T ctx, String i18nKey, Object targetInstance, String targetMethodName) {
 		super(ctx, i18nKey);
 		this.targetInstance = targetInstance;

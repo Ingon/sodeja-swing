@@ -35,7 +35,7 @@ public abstract class FormPanel<T extends ApplicationContext, R> extends Applica
 		FormUtils.standartPostInit(this, gridData, getActions());
 	}
 	
-	protected ApplicationAction[] getActions() {
+	protected ApplicationAction<T>[] getActions() {
 		return ButtonBarFactory.okCancelButtons(ctx, this);
 	}
 	

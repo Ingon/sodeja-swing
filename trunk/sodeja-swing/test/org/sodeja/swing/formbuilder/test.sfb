@@ -1,0 +1,6 @@
+package org.sodeja.swing.formbuilder;
+
+TestBackingObject {
+	name : text;
+	type : text;
+}

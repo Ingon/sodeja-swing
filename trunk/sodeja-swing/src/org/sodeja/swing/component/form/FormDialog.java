@@ -31,11 +31,15 @@ public abstract class FormDialog<T extends ApplicationContext> extends Applicati
 	@Override
 	protected final void initComponents() {
 		FormPanelGridData gridData = new FormPanelGridData();
+		prepareGridData(gridData);
 		preInitComponents(gridData);
 		initComponentsDelegate(gridData);
 		postInitComponents(gridData);
 	}
 
+	protected void prepareGridData(FormPanelGridData gridData) {
+	}
+	
 	protected void preInitComponents(FormPanelGridData gridData) {
 		this.getRootPane().getActionMap().put(ESCAPE_ACTION_KEY, ButtonBarFactory.closeToCancelButton(ctx, this));
 		
@@ -43,14 +47,14 @@ public abstract class FormDialog<T extends ApplicationContext> extends Applicati
 		this.getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(stroke, ENTER_ACTION_KEY);
 		this.getRootPane().getActionMap().put(ENTER_ACTION_KEY, ButtonBarFactory.okButton(ctx, this));
 	}
-
+	
 	protected abstract void initComponentsDelegate(FormPanelGridData gridData);
 
 	protected void postInitComponents(FormPanelGridData gridData) {
 		FormUtils.standartPostInit(this, gridData, getActions());
 	}
 
-	protected ApplicationAction[] getActions() {
+	protected ApplicationAction<T>[] getActions() {
 		return ButtonBarFactory.okCancelButtons(ctx, this);
 	}
 
