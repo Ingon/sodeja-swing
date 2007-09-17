@@ -7,7 +7,11 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
@@ -18,30 +22,66 @@ import org.sodeja.swing.context.ApplicationContext;
 
 public final class FormUtils {
 	public static JTextField addLabeledField(ApplicationContext ctx, Container parent, 
+			Enum lblKey, FormPanelGridData gridData) {
+		return addLabeledField(ctx, parent, lblKey.name(), gridData);
+	}
+	
+	public static JTextField addLabeledField(ApplicationContext ctx, Container parent, 
 			String lblKey, FormPanelGridData gridData) {
-		parent.add(ctx.getLocalizationFactory().createLabel(lblKey), GridBag.lineLabel(gridData.getRow()));
-		
-		JTextField tf = new JTextField();
-		parent.add(tf, GridBag.lineField(gridData.getRow()));
-		
-		gridData.nextRow();
-		
-		return tf;
+		return addLabeledComponent(ctx, parent, lblKey, gridData, new JTextField());
+	}
+	
+	public static JPasswordField addPasswordField(ApplicationContext ctx, Container parent,
+			Enum lblKey, FormPanelGridData gridData) {
+		return addPasswordField(ctx, parent, lblKey.name(), gridData);
+	}
+	
+	public static JPasswordField addPasswordField(ApplicationContext ctx, Container parent,
+			String lblKey, FormPanelGridData gridData) {
+		return addLabeledComponent(ctx, parent, lblKey, gridData, new JPasswordField());
 	}
 
 	public static JComboBox addLabeledCombo(ApplicationContext ctx, Container parent, 
+			Enum lblKey, FormPanelGridData gridData) {
+		return addLabeledCombo(ctx, parent, lblKey.name(), gridData);
+	}
+	
+	public static JComboBox addLabeledCombo(ApplicationContext ctx, Container parent, 
 			String lblKey, FormPanelGridData gridData) {
-		parent.add(ctx.getLocalizationFactory().createLabel(lblKey), GridBag.lineLabel(gridData.getRow()));
+		return addLabeledComponent(ctx, parent, lblKey, gridData, new JComboBox());
+	}
+	
+	public static JTextArea addLabeledArea(ApplicationContext ctx, Container parent,
+			Enum lblKey, FormPanelGridData gridData) {
+		return addLabeledArea(ctx, parent, lblKey.name(), gridData);
+	}
+	
+	public static JTextArea addLabeledArea(ApplicationContext ctx, Container parent,
+			String lblKey, FormPanelGridData gridData) {
 		
-		JComboBox cmb = new JComboBox();
-		parent.add(cmb, GridBag.lineField(gridData.getRow()));
+		parent.add(ctx.getLocalizationFactory().createLabel(lblKey), GridBag.lineLabelNorth(gridData.getRow()));
+		
+		JTextArea result = new JTextArea();
+		result.setRows(3);
+		parent.add(new JScrollPane(result), GridBag.lineField(gridData.getRow()));
 		
 		gridData.nextRow();
 		
-		return cmb;
+		return result;
 	}
 	
-	public static void standartPostInit(Container parent, FormPanelGridData gridData, ApplicationAction[] actions) {
+	private static <T extends ApplicationContext, F extends JComponent> F addLabeledComponent(T ctx, Container parent,
+			String lblKey, FormPanelGridData gridData, F component) {
+		parent.add(ctx.getLocalizationFactory().createLabel(lblKey), GridBag.lineLabel(gridData.getRow()));
+		
+		parent.add(component, GridBag.lineField(gridData.getRow()));
+		
+		gridData.nextRow();
+		
+		return component;
+	}
+	
+	public static <T extends ApplicationContext> void standartPostInit(Container parent, FormPanelGridData gridData, ApplicationAction<T>[] actions) {
 		if(gridData.isFillEmpty()) {
 			gridData.nextRow();
 			parent.add(new JPanel(), GridBag.bigPanel(gridData.getRow(), gridData.getColumnsCount()));
@@ -76,5 +116,22 @@ public final class FormUtils {
 		KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.CTRL_DOWN_MASK);
 		cont.registerKeyboardAction(ButtonBarFactory.okButton(ctx, instance), 
 				stroke, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+	}
+
+	public static JTable addLabeledTable(ApplicationContext ctx, Container parent, 
+			Enum lblKey, FormPanelGridData gridData) {
+		return addLabeledTable(ctx, parent, lblKey.name(), gridData);
+	}
+
+	public static JTable addLabeledTable(ApplicationContext ctx, Container parent, 
+			String lblKey, FormPanelGridData gridData) {
+		parent.add(ctx.getLocalizationFactory().createLabel(lblKey), GridBag.lineLabelNorth(gridData.getRow()));
+		
+		JTable result = new JTable();
+		parent.add(new JScrollPane(result), GridBag.create(1, gridData.getRow(), 1, 1, 1.0, 1.0));
+		
+		gridData.nextRow();
+		
+		return result;
 	}
 }

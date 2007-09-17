@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 
+import org.sodeja.collections.ArrayUtils;
 import org.sodeja.swing.component.action.ApplicationAction;
 import org.sodeja.swing.component.action.CallLocalMethodAction;
 import org.sodeja.swing.context.ApplicationContext;
@@ -21,7 +22,7 @@ public final class ButtonBarFactory {
 	
 	static {
 		BUTTON_PREFERRED_SIZE = new JButton().getPreferredSize();
-		BUTTON_PREFERRED_SIZE.width = 100;
+		BUTTON_PREFERRED_SIZE.width = 150;
 		BUTTON_PREFERRED_SIZE.height = new JTextField().getPreferredSize().height;
 	}
 	
@@ -33,12 +34,14 @@ public final class ButtonBarFactory {
         return constructButtonsPane(0, 1, actions);
     }
     
-    public static <T extends ApplicationContext> ApplicationAction[] okCancelButtons(T ctx, Object instance) {
-    	return new ApplicationAction[] {okButton(ctx, instance), cancelButton(ctx, instance)};
+    public static <T extends ApplicationContext> ApplicationAction<T>[] okCancelButtons(T ctx, Object instance) {
+    	return ArrayUtils.asArray(okButton(ctx, instance), cancelButton(ctx, instance));
+//    	return new ApplicationActcion<T>[] {okButton(ctx, instance), cancelButton(ctx, instance)};
     }
     
-    public static <T extends ApplicationContext> ApplicationAction[] closeButtons(T ctx, Object instance) {
-    	return new ApplicationAction[] {closeButton(ctx, instance)};
+    public static <T extends ApplicationContext> ApplicationAction<T>[] closeButtons(T ctx, Object instance) {
+    	return ArrayUtils.asArray(closeButton(ctx, instance));
+//    	return new ApplicationAction<T>[] {closeButton(ctx, instance)};
     }
 
     public static <T extends ApplicationContext> ApplicationAction<T> closeButton(T ctx, Object instance) {
@@ -47,11 +50,11 @@ public final class ButtonBarFactory {
 		return result;
     }
     
-    public static <T extends ApplicationContext> ApplicationAction[] closeToCancelButtons(T ctx, Object instance) {
+    public static <T extends ApplicationContext> ApplicationAction<T>[] closeToCancelButtons(T ctx, Object instance) {
     	return new ApplicationAction[] {closeToCancelButton(ctx, instance)};
     }
     
-    public static <T extends ApplicationContext> ApplicationAction closeToCancelButton(T ctx, Object instance) {
+    public static <T extends ApplicationContext> ApplicationAction<T> closeToCancelButton(T ctx, Object instance) {
     	CallLocalMethodAction<T> result = new CallLocalMethodAction<T>(ctx, ResourceConstants.BTN_CLOSE, instance, "cancelCallback");//$NON-NLS-1$
     	result.setIcon(ctx.getResourceProvider().getIconValue(ResourceConstants.ICON_CLOSE));
 		return result; 
