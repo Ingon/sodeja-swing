@@ -16,6 +16,9 @@ public class CallLocalMethodListSelectionListener implements ListSelectionListen
 	}
 	
 	public void valueChanged(ListSelectionEvent e) {
+		if(e.getValueIsAdjusting()) {
+			return;
+		}
 		ReflectUtils.executeMethod(targetInstance, targetMethodName, 
 				ReflectUtils.EMPTY_TYPES, ReflectUtils.EMPTY_PARAMETERS);
 	}
