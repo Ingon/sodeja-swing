@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.awt.Window;
 
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -35,6 +36,14 @@ public final class SodejaSwingUtils {
 		});
 	}
 
+	public static void showFrame(final JFrame frame) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				frame.setVisible(true);
+			}});
+	}
+	
 	public static void postEvent(AWTEvent event) {
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(event);
 	}
