@@ -38,11 +38,7 @@ public class LocalizationFactory {
 	}
 	
 	public JLabel createLabel(Enum i18n) {
-		JLabel lbl = new JLabel();
-		lbl.putClientProperty(I18NKey, i18n.name());
-		labels.add(new WeakReference<JLabel>(lbl));
-		setText(lbl);
-		return lbl;
+		return createLabel(i18n.name());
 	}
 
 	public JLabel createEnumLabel(Enum i18n) {
