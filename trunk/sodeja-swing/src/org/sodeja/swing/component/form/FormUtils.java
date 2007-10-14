@@ -22,7 +22,7 @@ import org.sodeja.swing.context.ApplicationContext;
 
 public final class FormUtils {
 	public static JTextField addLabeledField(ApplicationContext ctx, Container parent, 
-			Enum lblKey, FormPanelGridData gridData) {
+			Enum<?> lblKey, FormPanelGridData gridData) {
 		return addLabeledField(ctx, parent, lblKey.name(), gridData);
 	}
 	
@@ -32,7 +32,7 @@ public final class FormUtils {
 	}
 	
 	public static JPasswordField addPasswordField(ApplicationContext ctx, Container parent,
-			Enum lblKey, FormPanelGridData gridData) {
+			Enum<?> lblKey, FormPanelGridData gridData) {
 		return addPasswordField(ctx, parent, lblKey.name(), gridData);
 	}
 	
@@ -42,7 +42,7 @@ public final class FormUtils {
 	}
 
 	public static JComboBox addLabeledCombo(ApplicationContext ctx, Container parent, 
-			Enum lblKey, FormPanelGridData gridData) {
+			Enum<?> lblKey, FormPanelGridData gridData) {
 		return addLabeledCombo(ctx, parent, lblKey.name(), gridData);
 	}
 	
@@ -52,7 +52,7 @@ public final class FormUtils {
 	}
 	
 	public static JTextArea addLabeledArea(ApplicationContext ctx, Container parent,
-			Enum lblKey, FormPanelGridData gridData) {
+			Enum<?> lblKey, FormPanelGridData gridData) {
 		return addLabeledArea(ctx, parent, lblKey.name(), gridData);
 	}
 	
@@ -119,7 +119,7 @@ public final class FormUtils {
 	}
 
 	public static JTable addLabeledTable(ApplicationContext ctx, Container parent, 
-			Enum lblKey, FormPanelGridData gridData) {
+			Enum<?> lblKey, FormPanelGridData gridData) {
 		return addLabeledTable(ctx, parent, lblKey.name(), gridData);
 	}
 
