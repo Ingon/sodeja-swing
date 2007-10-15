@@ -5,12 +5,14 @@ import static org.sodeja.parsec.ParsecUtils.oneOrMoreSep;
 import static org.sodeja.parsec.ParsecUtils.thenParser;
 import static org.sodeja.parsec.ParsecUtils.thenParser3;
 import static org.sodeja.parsec.ParsecUtils.thenParser4;
+import static org.sodeja.parsec.ParsecUtils.thenParser4Cons13;
 import static org.sodeja.parsec.ParsecUtils.zeroOrMore;
 import static org.sodeja.parsec.standart.StandartParsers.alphaDigitsUnderscore;
 import static org.sodeja.parsec.standart.StandartParsers.literal;
 
 import java.util.List;
 
+import org.sodeja.collections.ConsList;
 import org.sodeja.collections.ListUtils;
 import org.sodeja.functional.Function1;
 import org.sodeja.functional.Function2;
@@ -25,12 +27,8 @@ class SFBParser {
 	
 	private Parser<String, String> TEXT = alphaDigitsUnderscore("TEXT");
 
-	private Parser<String, FormObjectField> FIELD = thenParser4("FIELD", TEXT, literal(":"), TEXT, literal(";"), 
-		new Function4<FormObjectField, String, String, String, String>() {
-			@Override
-			public FormObjectField execute(String p1, String p2, String p3, String p4) {
-				return new FormObjectField(p1, p3);
-			}});
+	private Parser<String, FormObjectField> FIELD = 
+		thenParser4Cons13("FIELD", TEXT, literal(":"), TEXT, literal(";"), FormObjectField.class);
 	
 	private Parser<String, List<FormObjectField>> FIELDS = zeroOrMore("FIELDS", FIELD);
 	
@@ -71,9 +69,10 @@ class SFBParser {
 				return ListUtils.flattern(p);
 			}});
 	
-	public List<FormObject> parse(List<String> tokens) {
-		List<Pair<List<FormObject>, List<String>>> parseResults = ROOT.execute(tokens);
-		for(Pair<List<FormObject>, List<String>> result : parseResults) {
+	public List<FormObject> parse(final List<String> tokensList) {
+		ConsList<String> tokens = ConsList.createList(tokensList);
+		List<Pair<List<FormObject>, ConsList<String>>> parseResults = ROOT.execute(tokens);
+		for(Pair<List<FormObject>, ConsList<String>> result : parseResults) {
 			if(result.second.isEmpty()) {
 				return result.first;
 			}
