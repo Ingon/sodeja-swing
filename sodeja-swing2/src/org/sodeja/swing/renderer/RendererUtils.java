@@ -26,7 +26,7 @@ public class RendererUtils {
 		if(rowBackground == null) {
 			rowBackground = defaultBackground;
 		}
-		return new Pair<Color, Color>(defaultBackground, rowBackground);
+		return Pair.of(defaultBackground, rowBackground);
 	}
 	
 	protected static void updateView(JComponent component, Pair<Color, Color> scheme, int row) {
