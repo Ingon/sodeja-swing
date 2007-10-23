@@ -71,7 +71,7 @@ class AddLocalizationDialog<T extends ApplicationContext> extends NamedFormDialo
 
 	@Override
 	protected void okCallback() {
-		result = new Pair<Locale, String>((Locale) cmbLocales.getSelectedItem(), tfValue.getText());
+		result = Pair.of((Locale) cmbLocales.getSelectedItem(), tfValue.getText());
 		
 		super.okCallback();
 	}
