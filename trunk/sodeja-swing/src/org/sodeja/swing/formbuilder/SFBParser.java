@@ -1,12 +1,12 @@
 package org.sodeja.swing.formbuilder;
 
-import static org.sodeja.parsec.ParsecUtils.apply;
-import static org.sodeja.parsec.ParsecUtils.oneOrMoreSep;
-import static org.sodeja.parsec.ParsecUtils.thenParser;
-import static org.sodeja.parsec.ParsecUtils.thenParser3;
-import static org.sodeja.parsec.ParsecUtils.thenParser4;
-import static org.sodeja.parsec.ParsecUtils.thenParser4Cons13;
-import static org.sodeja.parsec.ParsecUtils.zeroOrMore;
+import static org.sodeja.parsec.combinator.ParsecUtils.apply;
+import static org.sodeja.parsec.combinator.ParsecUtils.oneOrMoreSep;
+import static org.sodeja.parsec.combinator.ParsecUtils.thenParser;
+import static org.sodeja.parsec.combinator.ParsecUtils.thenParser3;
+import static org.sodeja.parsec.combinator.ParsecUtils.thenParser4;
+import static org.sodeja.parsec.combinator.ParsecUtils.thenParser4Cons13;
+import static org.sodeja.parsec.combinator.ParsecUtils.zeroOrMore;
 import static org.sodeja.parsec.standart.StandartParsers.alphaDigitsUnderscore;
 import static org.sodeja.parsec.standart.StandartParsers.literal;
 
