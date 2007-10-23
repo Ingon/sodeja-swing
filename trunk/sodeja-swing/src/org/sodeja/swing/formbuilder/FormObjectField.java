@@ -1,6 +1,6 @@
 package org.sodeja.swing.formbuilder;
 
-class FormObjectField {
+public class FormObjectField {
 	public final String name;
 	public final String type;
 
