@@ -12,16 +12,15 @@ import static org.sodeja.parsec.standart.StandartParsers.literal;
 
 import java.util.List;
 
-import org.sodeja.collections.ConsList;
 import org.sodeja.collections.ListUtils;
 import org.sodeja.functional.Function1;
 import org.sodeja.functional.Function2;
 import org.sodeja.functional.Function3;
 import org.sodeja.functional.Function4;
-import org.sodeja.functional.Pair;
 import org.sodeja.parsec.Parser;
+import org.sodeja.parsec.semantic.AbstractSemanticParser;
 
-class SFBParser {
+class SFBParser extends AbstractSemanticParser<String, List<FormObject>>{
 	
 	private String currentPackage;
 	
@@ -68,16 +67,9 @@ class SFBParser {
 			public List<FormObject> execute(List<List<FormObject>> p) {
 				return ListUtils.flattern(p);
 			}});
-	
-	public List<FormObject> parse(final List<String> tokensList) {
-		ConsList<String> tokens = ConsList.createList(tokensList);
-		List<Pair<List<FormObject>, ConsList<String>>> parseResults = ROOT.execute(tokens);
-		for(Pair<List<FormObject>, ConsList<String>> result : parseResults) {
-			if(result.second.isEmpty()) {
-				return result.first;
-			}
-		}
-		
-		throw new RuntimeException("Unable to parse");
+
+	@Override
+	protected Parser<String, List<FormObject>> getParser() {
+		return ROOT;
 	}
 }
