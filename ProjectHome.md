@@ -1,0 +1,1 @@
+A library/framework for developing swing applications. Includes localization i internatiolization, a number of components, contexts and etc.
